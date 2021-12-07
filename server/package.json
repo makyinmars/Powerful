@@ -4,6 +4,8 @@
   "description": "Powerful backend",
   "main": "index.js",
   "scripts": {
+    "start": "node dist/server.js",
+    "build": "prisma generate && tsc --outDir dist && cp -r prisma dist/prisma",
     "dev": "nodemon server.ts",
     "migrate": "npx prisma migrate dev"
   },
