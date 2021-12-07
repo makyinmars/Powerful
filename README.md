@@ -16,3 +16,4 @@ Powerful is the simplest and most intuitive workout experience.
 - TypeScript
 - PostgreSQL
 - JWT
+- Cookie Parser

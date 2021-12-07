@@ -1,11 +1,23 @@
 import express, { Request, Response } from "express";
+import helmet from "helmet";
+import dotenv from "dotenv";
+import cookieParser from "cookie-parser";
 
 import { userRoutes } from "./routes/userRoutes";
 import { workoutRoutes } from "./routes/workoutRoutes";
 import { exerciseRoutes } from "./routes/exerciseRoutes";
 import { setRoutes } from "./routes/setRoutes";
 
+// Environment variables
+dotenv.config();
+
 const app = express();
+
+// Secure HTTP headers
+app.use(helmet());
+
+// Cookie parser
+app.use(cookieParser());
 
 // Body parser middleware
 app.use(express.json());
