@@ -25,13 +25,13 @@ const createExercise = async (req: Request, res: Response) => {
     if (exercise) {
       res.status(201).json(exercise);
     } else {
-      res.status(400).json("Exercise not created");
+      res.status(500).json("Exercise not created");
     }
   } catch (error) {
     if (error instanceof Prisma.PrismaClientKnownRequestError) {
       console.log(error.meta);
     }
-    res.status(400).json(error.meta.cause);
+    res.status(500).json(error.meta.cause);
   }
 };
 
@@ -89,7 +89,7 @@ const updateExerciseById = async (req: Request, res: Response) => {
       console.log(error.meta);
     }
 
-    res.status(400).json(error.meta.cause);
+    res.status(404).json(error.meta.cause);
   }
 };
 
@@ -111,7 +111,7 @@ const deleteExerciseById = async (req: Request, res: Response) => {
     if (error instanceof Prisma.PrismaClientKnownRequestError) {
       console.log(error.meta);
     }
-    res.status(400).json(error.meta.cause);
+    res.status(404).json(error.meta.cause);
   }
 };
 
@@ -131,7 +131,7 @@ const getAllExercises = async (req: Request, res: Response) => {
     if (error instanceof Prisma.PrismaClientKnownRequestError) {
       console.log(error.meta);
     }
-    res.status(400).json(error.meta.cause);
+    res.status(404).json(error.meta.cause);
   }
 };
 

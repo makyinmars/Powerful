@@ -40,7 +40,6 @@ model Exercise {
 
 model Set {
   id          String @id @default(cuid())
-  sets        Int
   reps        Int
   weight      Int
   exercise    Exercise @relation(fields: [exerciseId], references: [id])

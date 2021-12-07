@@ -20,14 +20,14 @@ const registerUser = async (req: Request, res: Response) => {
     if (user) {
       res.status(201).json(user);
     } else {
-      res.status(400).json("User not created");
+      res.status(500).json("User not created");
     }
   } catch (error) {
     if (error instanceof Prisma.PrismaClientKnownRequestError) {
       console.log(error.meta);
     }
 
-    res.status(400).json(error.meta.cause);
+    res.status(500).json(error.meta.cause);
   }
 };
 
@@ -59,7 +59,7 @@ const loginUser = async (req: Request, res: Response) => {
       console.log(error.meta);
     }
 
-    res.status(400).json(error.meta.cause);
+    res.status(404).json(error.meta.cause);
   }
 };
 
@@ -87,14 +87,14 @@ const getUserById = async (req: Request, res: Response) => {
     if (user) {
       res.status(200).json(user);
     } else {
-      res.status(400).json("User not found");
+      res.status(404).json("User not found");
     }
   } catch (error) {
     if (error instanceof Prisma.PrismaClientKnownRequestError) {
       console.log(error.meta);
     }
 
-    res.status(400).json(error.meta.cause);
+    res.status(404).json(error.meta.cause);
   }
 };
 
@@ -127,7 +127,7 @@ const updateUserById = async (req: Request, res: Response) => {
       }
     }
 
-    res.status(400).json(error.meta.cause);
+    res.status(404).json(error.meta.cause);
   }
 };
 
@@ -152,7 +152,7 @@ const deleteUserById = async (req: Request, res: Response) => {
       console.log(error.meta);
     }
 
-    res.status(400).json(error.meta.cause);
+    res.status(404).json(error.meta.cause);
   }
 };
 
@@ -169,14 +169,14 @@ const getAllUsers = async (req: Request, res: Response) => {
     if (users) {
       res.status(200).json(users);
     } else {
-      res.status(400).json("Users not found");
+      res.status(404).json("Users not found");
     }
   } catch (error) {
     if (error instanceof Prisma.PrismaClientKnownRequestError) {
       console.log(error.meta);
     }
 
-    res.status(400).json(error.meta.cause);
+    res.status(404).json(error.meta.cause);
   }
 };
 

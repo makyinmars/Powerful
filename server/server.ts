@@ -3,6 +3,7 @@ import express, { Request, Response } from "express";
 import { userRoutes } from "./routes/userRoutes";
 import { workoutRoutes } from "./routes/workoutRoutes";
 import { exerciseRoutes } from "./routes/exerciseRoutes";
+import { setRoutes } from "./routes/setRoutes";
 
 const app = express();
 
@@ -22,6 +23,9 @@ app.use("/api/workout", workoutRoutes);
 
 // Exercise Routes
 app.use("/api/exercise", exerciseRoutes);
+
+// Set Routes
+app.use("/api/set", setRoutes);
 
 const PORT = process.env.PORT || 5000;
 
