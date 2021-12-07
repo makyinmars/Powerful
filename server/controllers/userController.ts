@@ -7,19 +7,27 @@ const prisma = new PrismaClient();
 // @route  POST /api/user/register
 // @access Public
 const registerUser = async (req: Request, res: Response) => {
-  const { email, password, name } = req.body;
-  const user = await prisma.user.create({
-    data: {
-      email: email,
-      password: password,
-      name: name,
-    },
-  });
+  try {
+    const { email, password, name } = req.body;
+    const user = await prisma.user.create({
+      data: {
+        email: email,
+        password: password,
+        name: name,
+      },
+    });
 
-  if (user) {
-    res.status(201).json(user);
-  } else {
-    res.status(400).json("User not created");
+    if (user) {
+      res.status(201).json(user);
+    } else {
+      res.status(400).json("User not created");
+    }
+  } catch (error) {
+    if (error instanceof Prisma.PrismaClientKnownRequestError) {
+      console.log(error.meta);
+    }
+
+    res.status(400).json(error.meta.cause);
   }
 };
 
@@ -27,20 +35,32 @@ const registerUser = async (req: Request, res: Response) => {
 // @route  POST /api/user/login
 // @access Public
 const loginUser = async (req: Request, res: Response) => {
-  const { email, password } = req.body;
+  try {
+    const { email, password } = req.body;
 
-  const user = await prisma.user.findMany({
-    where: {
-      email: {
-        equals: email,
+    const user = await prisma.user.findMany({
+      where: {
+        email: {
+          equals: email,
+        },
+        password: {
+          equals: password,
+        },
       },
-      password: {
-        equals: password,
-      },
-    },
-  });
+    });
 
-  res.json(user);
+    if (user) {
+      res.status(200).json(user);
+    } else {
+      res.status(404).json("User not found");
+    }
+  } catch (error) {
+    if (error instanceof Prisma.PrismaClientKnownRequestError) {
+      console.log(error.meta);
+    }
+
+    res.status(400).json(error.meta.cause);
+  }
 };
 
 // @desc   Get user by id
@@ -141,7 +161,11 @@ const deleteUserById = async (req: Request, res: Response) => {
 // @access Private
 const getAllUsers = async (req: Request, res: Response) => {
   try {
-    const users = await prisma.user.findMany({});
+    const users = await prisma.user.findMany({
+      include: {
+        workouts: true,
+      },
+    });
     if (users) {
       res.status(200).json(users);
     } else {
