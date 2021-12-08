@@ -36,7 +36,9 @@ const registerUser = async (req: Request, res: Response) => {
       },
     });
 
+    // Store token on cookies
     res.cookie("token", generateToken(user.id));
+    user.token = generateToken(user.id);
 
     if (user) {
       // Stores the token in the cookie
@@ -78,6 +80,9 @@ const loginUser = async (req: Request, res: Response) => {
       res.status(401).json("Email address or password invalid");
     }
 
+    res.cookie("token", generateToken(user[0].id));
+    user[0].token = generateToken(user[0].id);
+
     if (user) {
       res.status(200).json(user);
     } else {
@@ -110,6 +115,7 @@ const getUserById = async (req: Request, res: Response) => {
         password: true,
         age: true,
         goal: true,
+        token: true,
       },
     });
 
@@ -133,7 +139,7 @@ const getUserById = async (req: Request, res: Response) => {
 const updateUserById = async (req: Request, res: Response) => {
   try {
     const { id } = req.params;
-    const { email, password, name } = req.body;
+    const { email, password, name, age, goal } = req.body;
 
     const user = await prisma.user.update({
       where: {
@@ -143,6 +149,8 @@ const updateUserById = async (req: Request, res: Response) => {
         name: name,
         email: email,
         password: password,
+        age: age,
+        goal: goal,
       },
     });
 

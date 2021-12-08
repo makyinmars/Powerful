@@ -6,14 +6,15 @@ import {
   getExerciseById,
   updateExerciseById,
 } from "../controllers/exerciseController";
+import { auth, admin } from "../middleware/authMiddleware";
 
 const router = express.Router();
 
-router.route("/").post(createExercise).get(getAllExercises);
+router.route("/").post(createExercise).get(auth, admin, getAllExercises);
 router
   .route("/:id")
-  .get(getExerciseById)
-  .put(updateExerciseById)
-  .delete(deleteExerciseById);
+  .get(auth, getExerciseById)
+  .put(auth, updateExerciseById)
+  .delete(auth, deleteExerciseById);
 
 export { router as exerciseRoutes };

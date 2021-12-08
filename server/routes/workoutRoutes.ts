@@ -6,14 +6,15 @@ import {
   getWorkoutById,
   updateWorkoutById,
 } from "../controllers/workoutController";
+import { auth, admin } from "../middleware/authMiddleware";
 
 const router = express.Router();
 
-router.route("/").post(createWorkout).get(getAllWorkouts);
+router.route("/").post(createWorkout).get(auth, admin, getAllWorkouts);
 router
   .route("/:id")
-  .get(getWorkoutById)
-  .put(updateWorkoutById)
-  .delete(deleteWorkoutById);
+  .get(auth, getWorkoutById)
+  .put(auth, updateWorkoutById)
+  .delete(auth, deleteWorkoutById);
 
 export { router as workoutRoutes };

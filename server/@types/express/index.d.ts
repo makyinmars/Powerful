@@ -9,8 +9,9 @@ interface User {
   email: string;
   name: string;
   password: string;
-  age?: number;
-  goal?: string;
+  isAdmin: boolean;
+  age: number;
+  goal: string;
   workouts?: Workout[];
 }
 

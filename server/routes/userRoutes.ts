@@ -8,16 +8,17 @@ import {
   deleteUserById,
   getAllUsers,
 } from "../controllers/userController";
+import { auth, admin } from "../middleware/authMiddleware";
 
 const router = express.Router();
 
-router.get("/", getAllUsers);
+router.get("/", auth, admin, getAllUsers);
 router.post("/register", registerUser);
 router.post("/login", loginUser);
 router
   .route("/:id")
-  .get(getUserById)
-  .put(updateUserById)
-  .delete(deleteUserById);
+  .get(auth, getUserById)
+  .put(auth, updateUserById)
+  .delete(auth, deleteUserById);
 
 export { router as userRoutes };

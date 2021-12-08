@@ -2,6 +2,7 @@ import express, { Request, Response } from "express";
 import helmet from "helmet";
 import dotenv from "dotenv";
 import cookieParser from "cookie-parser";
+import cors from "cors";
 
 import { userRoutes } from "./routes/userRoutes";
 import { workoutRoutes } from "./routes/workoutRoutes";
@@ -15,6 +16,9 @@ const app = express();
 
 // Secure HTTP headers
 app.use(helmet());
+
+// Cors
+app.use(cors());
 
 // Cookie parser
 app.use(cookieParser());
