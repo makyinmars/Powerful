@@ -3,11 +3,13 @@ import helmet from "helmet";
 import dotenv from "dotenv";
 import cookieParser from "cookie-parser";
 import cors from "cors";
+import fileUpload from "express-fileupload";
 
 import { userRoutes } from "./routes/userRoutes";
 import { workoutRoutes } from "./routes/workoutRoutes";
 import { exerciseRoutes } from "./routes/exerciseRoutes";
 import { setRoutes } from "./routes/setRoutes";
+import { progressRoutes } from "./routes/progressRoutes";
 
 // Environment variables
 dotenv.config();
@@ -16,6 +18,15 @@ const app = express();
 
 // Secure HTTP headers
 app.use(helmet());
+
+// File upload
+app.use(
+  fileUpload({
+    limits: { fileSize: 50 * 1024 * 1024 },
+    useTempFiles: true,
+    tempFileDir: "/tmp/",
+  })
+);
 
 // Cors
 app.use(cors());
@@ -42,6 +53,9 @@ app.use("/api/exercise", exerciseRoutes);
 
 // Set Routes
 app.use("/api/set", setRoutes);
+
+// Progress Routes
+app.use("/api/progress", progressRoutes);
 
 const PORT = process.env.PORT || 5000;
 

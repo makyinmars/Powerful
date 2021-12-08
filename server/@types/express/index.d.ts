@@ -40,6 +40,16 @@ interface Set {
   exerciseId: string;
 }
 
+interface Progress {
+  id: string;
+  picture: string;
+  description: string;
+  weight: number;
+  cloudinary_id: string;
+  user: User;
+  userId: string;
+}
+
 declare global {
   namespace Express {
     interface Request {
@@ -47,6 +57,7 @@ declare global {
       workout: Workout;
       exercise: Exercise;
       set: Set;
+      progress: Progress;
     }
   }
 }

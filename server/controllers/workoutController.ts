@@ -24,14 +24,14 @@ const createWorkout = async (req: Request, res: Response) => {
     if (workout) {
       res.status(201).json(workout);
     } else {
-      res.status(500).json("Workout not created");
+      res.status(400).json("Workout not created");
     }
   } catch (error) {
     if (error instanceof Prisma.PrismaClientKnownRequestError) {
       console.log(error.meta);
     }
 
-    res.status(500).json(error.meta.cause);
+    res.status(400).json(error.meta.cause);
   }
 };
 

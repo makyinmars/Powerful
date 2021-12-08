@@ -20,6 +20,7 @@ model User {
   token     String?
   isAdmin   Boolean @default(false)
   workouts    Workout[]
+  progress    Progress[]
 }
 
 model Workout {
@@ -44,4 +45,14 @@ model Set {
   weight      Int
   exercise    Exercise @relation(fields: [exerciseId], references: [id])
   exerciseId  String
+}
+
+model Progress {
+id         String @id @default(cuid())
+picture    String
+description String
+weight     Int
+cloudinary_id String
+user       User @relation(fields: [userId], references: [id])
+userId    String
 }
