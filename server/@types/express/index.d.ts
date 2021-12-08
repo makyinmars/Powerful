@@ -18,7 +18,6 @@ interface User {
 interface Workout {
   id: string;
   name: string;
-  description: string;
   user: User;
   userId: string;
   exercises: Exercise[];
@@ -27,7 +26,6 @@ interface Workout {
 interface Exercise {
   id: string;
   name: string;
-  description: string;
   sets: Set[];
   workout: Workout;
   workoutId: string;

@@ -8,12 +8,11 @@ const prisma = new PrismaClient();
 // @access  Private
 const createWorkout = async (req: Request, res: Response) => {
   try {
-    const { userId, name, description } = req.body;
+    const { userId, name } = req.body;
 
     const workout = await prisma.workout.create({
       data: {
         name: name,
-        description: description,
         user: {
           connect: {
             id: userId,
@@ -47,7 +46,6 @@ const getWorkoutById = async (req: Request, res: Response) => {
       where: { id: id },
       select: {
         name: true,
-        description: true,
         userId: true,
       },
     });
@@ -72,7 +70,7 @@ const getWorkoutById = async (req: Request, res: Response) => {
 const updateWorkoutById = async (req: Request, res: Response) => {
   try {
     const { id } = req.params;
-    const { name, description } = req.body;
+    const { name } = req.body;
 
     const workout = await prisma.workout.update({
       where: {
@@ -80,7 +78,6 @@ const updateWorkoutById = async (req: Request, res: Response) => {
       },
       data: {
         name: name,
-        description: description,
       },
     });
 
