@@ -49,9 +49,8 @@ const registerUser = async (req: Request, res: Response) => {
   } catch (error) {
     if (error instanceof Prisma.PrismaClientKnownRequestError) {
       console.log(error.meta);
+      res.status(500).json(error.meta);
     }
-
-    res.status(500).json(error);
   }
 };
 
@@ -91,9 +90,8 @@ const loginUser = async (req: Request, res: Response) => {
   } catch (error) {
     if (error instanceof Prisma.PrismaClientKnownRequestError) {
       console.log(error.meta);
+      res.status(404).json(error.meta);
     }
-
-    res.status(404).json(error.meta.cause);
   }
 };
 
@@ -127,9 +125,8 @@ const getUserById = async (req: Request, res: Response) => {
   } catch (error) {
     if (error instanceof Prisma.PrismaClientKnownRequestError) {
       console.log(error.meta);
+      res.status(404).json(error.meta);
     }
-
-    res.status(404).json(error.meta.cause);
   }
 };
 
@@ -161,10 +158,9 @@ const updateUserById = async (req: Request, res: Response) => {
     if (error instanceof Prisma.PrismaClientKnownRequestError) {
       if (error.code === "P2025") {
         console.log(error.meta);
+        res.status(404).json(error.meta);
       }
     }
-
-    res.status(404).json(error.meta.cause);
   }
 };
 
@@ -187,9 +183,8 @@ const deleteUserById = async (req: Request, res: Response) => {
   } catch (error) {
     if (error instanceof Prisma.PrismaClientKnownRequestError) {
       console.log(error.meta);
+      res.status(404).json(error.meta);
     }
-
-    res.status(404).json(error.meta.cause);
   }
 };
 
@@ -211,9 +206,8 @@ const getAllUsers = async (req: Request, res: Response) => {
   } catch (error) {
     if (error instanceof Prisma.PrismaClientKnownRequestError) {
       console.log(error.meta);
+      res.status(404).json(error.meta);
     }
-
-    res.status(404).json(error.meta.cause);
   }
 };
 

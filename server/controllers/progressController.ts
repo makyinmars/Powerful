@@ -10,14 +10,22 @@ const prisma = new PrismaClient();
 // @access Private
 const createProgress = async (req: Request, res: Response) => {
   try {
-    const { userId, picture, description, weight } = req.body;
+    // Cloudinary upload
+    const result = await cloudinary.v2.uploader.upload(
+      req.files["image"].tempFilePath,
+      { folder: "progress" }
+    );
+
+    const { userId, description, weight } = req.body;
+
+    const weightInt = parseInt(weight);
 
     const progress = await prisma.progress.create({
       data: {
-        picture: picture,
+        picture: result.secure_url,
         description: description,
-        weight: weight,
-        cloudinary_id: "hi",
+        weight: weightInt,
+        cloudinary_id: result.public_id,
         user: {
           connect: {
             id: userId,
@@ -39,14 +47,4 @@ const createProgress = async (req: Request, res: Response) => {
   }
 };
 
-// Testing express-fileupload
-const test = async (req: Request, res: Response) => {
-  if (req.files) {
-    const image = req.files["image"];
-    console.log(image);
-  }
-
-  res.status(201).json(req.files);
-};
-
-export { createProgress, test };
+export { createProgress };

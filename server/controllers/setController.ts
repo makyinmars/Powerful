@@ -30,9 +30,8 @@ const createSet = async (req: Request, res: Response) => {
   } catch (error) {
     if (error instanceof Prisma.PrismaClientKnownRequestError) {
       console.log(error.meta);
+      res.status(500).json(error.meta);
     }
-
-    res.status(500).json(error.meta.cause);
   }
 };
 
@@ -62,9 +61,8 @@ const getSetById = async (req: Request, res: Response) => {
   } catch (error) {
     if (error instanceof Prisma.PrismaClientKnownRequestError) {
       console.log(error.meta);
+      res.status(404).json(error.meta);
     }
-
-    res.status(404).json(error.meta.cause);
   }
 };
 
@@ -92,9 +90,8 @@ const updateSetById = async (req: Request, res: Response) => {
   } catch (error) {
     if (error instanceof Prisma.PrismaClientKnownRequestError) {
       console.log(error.meta);
+      res.status(404).json(error.meta);
     }
-
-    res.status(404).json(error.meta.cause);
   }
 };
 
@@ -117,9 +114,8 @@ const deleteSetById = async (req: Request, res: Response) => {
   } catch (error) {
     if (error instanceof Prisma.PrismaClientKnownRequestError) {
       console.log(error.meta);
+      res.status(404).json(error.meta);
     }
-
-    res.status(404).json(error.meta.cause);
   }
 };
 
@@ -138,9 +134,8 @@ const getAllSets = async (req: Request, res: Response) => {
   } catch (error) {
     if (error instanceof Prisma.PrismaClientKnownRequestError) {
       console.log(error.meta);
+      res.status(404).json(error.meta);
     }
-
-    res.status(404).json(error.meta.cause);
   }
 };
 

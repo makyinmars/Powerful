@@ -29,9 +29,8 @@ const createWorkout = async (req: Request, res: Response) => {
   } catch (error) {
     if (error instanceof Prisma.PrismaClientKnownRequestError) {
       console.log(error.meta);
+      res.status(400).json(error.meta);
     }
-
-    res.status(400).json(error.meta.cause);
   }
 };
 
@@ -58,9 +57,8 @@ const getWorkoutById = async (req: Request, res: Response) => {
   } catch (error) {
     if (error instanceof Prisma.PrismaClientKnownRequestError) {
       console.log(error.meta);
+      res.status(404).json(error.meta);
     }
-
-    res.status(404).json(error.meta.cause);
   }
 };
 
@@ -87,8 +85,8 @@ const updateWorkoutById = async (req: Request, res: Response) => {
   } catch (error) {
     if (error instanceof Prisma.PrismaClientKnownRequestError) {
       console.log(error.meta);
+      res.status(404).json(error.meta);
     }
-    res.status(404).json(error.meta.cause);
   }
 };
 
@@ -111,8 +109,8 @@ const deleteWorkoutById = async (req: Request, res: Response) => {
   } catch (error) {
     if (error instanceof Prisma.PrismaClientKnownRequestError) {
       console.log(error.meta);
+      res.status(404).json(error.meta);
     }
-    res.status(404).json(error.meta.cause);
   }
 };
 
@@ -131,9 +129,8 @@ const getAllWorkouts = async (req: Request, res: Response) => {
   } catch (error) {
     if (error instanceof Prisma.PrismaClientKnownRequestError) {
       console.log(error.meta);
+      res.status(404).json(error.meta);
     }
-
-    res.status(404).json(error.meta.cause);
   }
 };
 
