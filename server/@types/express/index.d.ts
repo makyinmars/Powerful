@@ -1,5 +1,3 @@
-import internal from "stream";
-
 export {};
 
 /**
@@ -10,6 +8,7 @@ interface User {
   id: string;
   email: string;
   name: string;
+  password: string;
   age?: number;
   goal?: string;
   workouts?: Workout[];

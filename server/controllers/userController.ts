@@ -65,15 +65,22 @@ const loginUser = async (req: Request, res: Response) => {
         email: {
           equals: email,
         },
-        password: {
-          equals: password,
-        },
       },
     });
 
+    if (user.length === 0) {
+      res.status(404).json("User not registered");
+    }
+
+    const checkPassword = bcrypt.compareSync(password, user[0].password);
+
+    if (!checkPassword) {
+      res.status(401).json("Email address or password invalid");
+    }
+
     if (user) {
       res.status(200).json(user);
-    } else if (user.length === 0) {
+    } else {
       res.status(404).json("User not found");
     }
   } catch (error) {
