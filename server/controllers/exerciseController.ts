@@ -24,12 +24,12 @@ const createExercise = async (req: Request, res: Response) => {
     if (exercise) {
       res.status(201).json(exercise);
     } else {
-      res.status(500).json("Exercise not created");
+      res.status(404).json("Exercise not created");
     }
   } catch (error) {
     if (error instanceof Prisma.PrismaClientKnownRequestError) {
       console.log(error.meta);
-      res.status(500).json(error.meta);
+      res.status(400).json(error.meta);
     }
   }
 };
@@ -57,7 +57,7 @@ const getExerciseById = async (req: Request, res: Response) => {
   } catch (error) {
     if (error instanceof Prisma.PrismaClientKnownRequestError) {
       console.log(error.meta);
-      res.status(404).json(error.meta);
+      res.status(400).json(error.meta);
     }
   }
 };
@@ -83,7 +83,7 @@ const updateExerciseById = async (req: Request, res: Response) => {
   } catch (error) {
     if (error instanceof Prisma.PrismaClientKnownRequestError) {
       console.log(error.meta);
-      res.status(404).json(error.meta);
+      res.status(400).json(error.meta);
     }
   }
 };
@@ -105,7 +105,7 @@ const deleteExerciseById = async (req: Request, res: Response) => {
   } catch (error) {
     if (error instanceof Prisma.PrismaClientKnownRequestError) {
       console.log(error.meta);
-      res.status(404).json(error.meta);
+      res.status(400).json(error.meta);
     }
   }
 };
@@ -117,7 +117,7 @@ const getAllExercises = async (req: Request, res: Response) => {
   try {
     const exercises = await prisma.exercise.findMany({});
 
-    if (exercises) {
+    if (Object.keys(exercises).length > 0) {
       res.status(200).json(exercises);
     } else {
       res.status(404).json("Exercises not found");
@@ -125,7 +125,7 @@ const getAllExercises = async (req: Request, res: Response) => {
   } catch (error) {
     if (error instanceof Prisma.PrismaClientKnownRequestError) {
       console.log(error.meta);
-      res.status(404).json(error.meta);
+      res.status(400).json(error.meta);
     }
   }
 };

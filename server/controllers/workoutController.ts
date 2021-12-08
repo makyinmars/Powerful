@@ -24,7 +24,7 @@ const createWorkout = async (req: Request, res: Response) => {
     if (workout) {
       res.status(201).json(workout);
     } else {
-      res.status(400).json("Workout not created");
+      res.status(404).json("Workout not created");
     }
   } catch (error) {
     if (error instanceof Prisma.PrismaClientKnownRequestError) {
@@ -44,6 +44,7 @@ const getWorkoutById = async (req: Request, res: Response) => {
     const workout = await prisma.workout.findUnique({
       where: { id: id },
       select: {
+        id: true,
         name: true,
         userId: true,
       },
@@ -57,7 +58,7 @@ const getWorkoutById = async (req: Request, res: Response) => {
   } catch (error) {
     if (error instanceof Prisma.PrismaClientKnownRequestError) {
       console.log(error.meta);
-      res.status(404).json(error.meta);
+      res.status(400).json(error.meta);
     }
   }
 };
@@ -85,7 +86,7 @@ const updateWorkoutById = async (req: Request, res: Response) => {
   } catch (error) {
     if (error instanceof Prisma.PrismaClientKnownRequestError) {
       console.log(error.meta);
-      res.status(404).json(error.meta);
+      res.status(400).json(error.meta);
     }
   }
 };
@@ -109,7 +110,7 @@ const deleteWorkoutById = async (req: Request, res: Response) => {
   } catch (error) {
     if (error instanceof Prisma.PrismaClientKnownRequestError) {
       console.log(error.meta);
-      res.status(404).json(error.meta);
+      res.status(400).json(error.meta);
     }
   }
 };
@@ -121,7 +122,7 @@ const getAllWorkouts = async (req: Request, res: Response) => {
   try {
     const workouts = await prisma.workout.findMany({});
 
-    if (workouts) {
+    if (Object.keys(workouts).length > 0) {
       res.status(200).json(workouts);
     } else {
       res.status(404).json("Workouts not found");
@@ -129,7 +130,7 @@ const getAllWorkouts = async (req: Request, res: Response) => {
   } catch (error) {
     if (error instanceof Prisma.PrismaClientKnownRequestError) {
       console.log(error.meta);
-      res.status(404).json(error.meta);
+      res.status(400).json(error.meta);
     }
   }
 };

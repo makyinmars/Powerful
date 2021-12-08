@@ -25,12 +25,12 @@ const createSet = async (req: Request, res: Response) => {
     if (set) {
       res.status(201).json(set);
     } else {
-      res.status(500).json("Set not created");
+      res.status(404).json("Set not created");
     }
   } catch (error) {
     if (error instanceof Prisma.PrismaClientKnownRequestError) {
       console.log(error.meta);
-      res.status(500).json(error.meta);
+      res.status(400).json(error.meta);
     }
   }
 };
@@ -61,7 +61,7 @@ const getSetById = async (req: Request, res: Response) => {
   } catch (error) {
     if (error instanceof Prisma.PrismaClientKnownRequestError) {
       console.log(error.meta);
-      res.status(404).json(error.meta);
+      res.status(400).json(error.meta);
     }
   }
 };
@@ -90,7 +90,7 @@ const updateSetById = async (req: Request, res: Response) => {
   } catch (error) {
     if (error instanceof Prisma.PrismaClientKnownRequestError) {
       console.log(error.meta);
-      res.status(404).json(error.meta);
+      res.status(400).json(error.meta);
     }
   }
 };
@@ -114,7 +114,7 @@ const deleteSetById = async (req: Request, res: Response) => {
   } catch (error) {
     if (error instanceof Prisma.PrismaClientKnownRequestError) {
       console.log(error.meta);
-      res.status(404).json(error.meta);
+      res.status(400).json(error.meta);
     }
   }
 };
@@ -126,7 +126,7 @@ const getAllSets = async (req: Request, res: Response) => {
   try {
     const sets = await prisma.set.findMany({});
 
-    if (sets) {
+    if (Object.keys(sets).length > 0) {
       res.status(200).json(sets);
     } else {
       res.status(404).json("Sets not found");
@@ -134,7 +134,7 @@ const getAllSets = async (req: Request, res: Response) => {
   } catch (error) {
     if (error instanceof Prisma.PrismaClientKnownRequestError) {
       console.log(error.meta);
-      res.status(404).json(error.meta);
+      res.status(400).json(error.meta);
     }
   }
 };

@@ -125,7 +125,7 @@ const getUserById = async (req: Request, res: Response) => {
   } catch (error) {
     if (error instanceof Prisma.PrismaClientKnownRequestError) {
       console.log(error.meta);
-      res.status(404).json(error.meta);
+      res.status(400).json(error.meta);
     }
   }
 };
@@ -156,10 +156,8 @@ const updateUserById = async (req: Request, res: Response) => {
     }
   } catch (error) {
     if (error instanceof Prisma.PrismaClientKnownRequestError) {
-      if (error.code === "P2025") {
-        console.log(error.meta);
-        res.status(404).json(error.meta);
-      }
+      console.log(error.meta);
+      res.status(400).json(error.meta);
     }
   }
 };
@@ -183,7 +181,7 @@ const deleteUserById = async (req: Request, res: Response) => {
   } catch (error) {
     if (error instanceof Prisma.PrismaClientKnownRequestError) {
       console.log(error.meta);
-      res.status(404).json(error.meta);
+      res.status(400).json(error.meta);
     }
   }
 };
@@ -198,7 +196,7 @@ const getAllUsers = async (req: Request, res: Response) => {
         workouts: true,
       },
     });
-    if (users) {
+    if (Object.keys(users).length > 0) {
       res.status(200).json(users);
     } else {
       res.status(404).json("Users not found");
@@ -206,7 +204,7 @@ const getAllUsers = async (req: Request, res: Response) => {
   } catch (error) {
     if (error instanceof Prisma.PrismaClientKnownRequestError) {
       console.log(error.meta);
-      res.status(404).json(error.meta);
+      res.status(400).json(error.meta);
     }
   }
 };
