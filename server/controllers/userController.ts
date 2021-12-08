@@ -41,7 +41,6 @@ const registerUser = async (req: Request, res: Response) => {
     user.token = generateToken(user.id);
 
     if (user) {
-      // Stores the token in the cookie
       res.status(201).json(user);
     } else {
       res.status(500).json("User not created");
@@ -69,7 +68,7 @@ const loginUser = async (req: Request, res: Response) => {
       },
     });
 
-    if (user.length === 0) {
+    if (Object.keys(user).length === 0) {
       res.status(404).json("User not registered");
     }
 
