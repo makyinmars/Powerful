@@ -7,16 +7,18 @@ interface LayoutProps {
 
 const Layout = ({ children }: LayoutProps) => {
   return (
-    <div className="h-screen flex flex-col bg-brand">
+    <div className="h-full flex flex-col bg-gray-200">
       <header className="flex items-center justify-around h-12 px-2">
         <Navbar href="/">
-          <FaDumbbell />
+          <FaDumbbell size="32" />
         </Navbar>
         <Navbar href="/register">Register</Navbar>
         <Navbar href="/login">Login</Navbar>
       </header>
-      <main className="mb-auto h-full">{children}</main>
-      <footer className="h-auto flex items-center justify-center flex-col pb-2">
+      <main className="mb-auto h-full sm:h-screen bg-gray-200 py-4">
+        {children}
+      </main>
+      <footer className="flex items-center justify-center flex-col py-4">
         <p className="title-font">Copyright Powerful &copy; 2021</p>
         <a className="title-font" href="https://github.com/makyfj/Powerful">
           Source Code
