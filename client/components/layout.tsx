@@ -15,10 +15,8 @@ const Layout = ({ children }: LayoutProps) => {
         <Navbar href="/register">Register</Navbar>
         <Navbar href="/login">Login</Navbar>
       </header>
-      <main className="mb-auto h-full sm:h-screen bg-gray-200 py-4">
-        {children}
-      </main>
-      <footer className="flex items-center justify-center flex-col py-4">
+      <main className="h-full sm:h-screen-auto py-4">{children}</main>
+      <footer className="sm:h-full-auto flex items-center justify-center flex-col py-4">
         <p className="title-font">Copyright Powerful &copy; 2021</p>
         <a className="title-font" href="https://github.com/makyfj/Powerful">
           Source Code

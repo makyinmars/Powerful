@@ -6,7 +6,7 @@ const Main = () => {
       <div className="flex justify-center flex-col items-center">
         <img src="/logo/dumbbell.svg" alt="logo" className="h-20 w-20" />
         <div>
-          <span className="text-md font-bold">Powerful </span>
+          <span className="text-xl font-bold">Powerful </span>
         </div>
       </div>
       <div className="h-full grid grid-cols-1 gap-4 sm:grid-cols-2">
