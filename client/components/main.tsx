@@ -4,9 +4,12 @@ const Main = () => {
   return (
     <>
       <div className="flex justify-center flex-col items-center">
-        <img src="/logo/dumbbell.svg" alt="logo" className="h-20 w-20" />
-        <div>
-          <span className="text-xl font-bold">Powerful </span>
+        <div className="flex flex-col items-center gap-4">
+          <p className="px-4">
+            Powerful is a simple and intuitive workout application that makes
+            your tracking experience easy. Think less and lift more. Make those
+            gains with Powerful.
+          </p>
         </div>
       </div>
       <div className="h-full grid grid-cols-1 gap-4 sm:grid-cols-2">

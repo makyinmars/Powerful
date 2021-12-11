@@ -5,8 +5,7 @@ Powerful is the simplest and most intuitive workout experience.
 ## Front End
 
 - NextJs
-- GraphQL
-- Apollo
+- Redux Toolkit
 - Tailwind
 
 ## Back End

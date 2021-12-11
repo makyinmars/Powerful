@@ -1,9 +1,0 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
-
-@layer components {
-  .title-font {
-    @apply text-brand-600 hover:text-brand-300 font-bold text-lg;
-  }
-}
