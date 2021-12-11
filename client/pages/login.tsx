@@ -4,22 +4,15 @@ import { useForm, SubmitHandler } from "react-hook-form";
 import { setCredentials } from "../app/features/auth/authSlice";
 import { useDispatch } from "react-redux";
 
-import { useLoginMutation } from "../app/services/auth";
-import type { LoginRequest } from "../app/services/auth";
-
-interface LoginInputs {
-  email: string;
-  password: string;
-}
+import { useLoginMutation } from "../app/services/userApi";
+import type { LoginRequest } from "../app/services/userApi";
 
 const Login = () => {
   const dispatch = useDispatch();
 
   const router = useRouter();
 
-  const [login, { isLoading }] = useLoginMutation();
-
-  console.log(isLoading);
+  const [login, { isLoading, data }] = useLoginMutation();
 
   const {
     register,
@@ -32,8 +25,7 @@ const Login = () => {
     try {
       const user = await login(data).unwrap();
       dispatch(setCredentials(user));
-      console.log(user);
-      router.push("/");
+      router.push("/user/test");
     } catch (error) {
       console.log(error);
     }

@@ -38,10 +38,10 @@ const registerUser = async (req: Request, res: Response) => {
 
     // Store token on cookies
     res.cookie("token", generateToken(user.id));
-    user.token = generateToken(user.id);
+    const token = generateToken(user.id);
 
     if (user) {
-      res.status(201).json(user);
+      res.status(201).json({ user, token });
     } else {
       res.status(500).json("User not created");
     }
@@ -71,7 +71,6 @@ const loginUser = async (req: Request, res: Response) => {
         password: true,
         age: true,
         goal: true,
-        token: true,
       },
     });
 
@@ -86,10 +85,10 @@ const loginUser = async (req: Request, res: Response) => {
     }
 
     res.cookie("token", generateToken(user.id));
-    user.token = generateToken(user.id);
+    const token = generateToken(user.id);
 
     if (user) {
-      res.status(200).json(user);
+      res.status(200).json({ user, token });
     } else {
       res.status(404).json("User not found");
     }
@@ -119,7 +118,6 @@ const getUserById = async (req: Request, res: Response) => {
         password: true,
         age: true,
         goal: true,
-        token: true,
       },
     });
 

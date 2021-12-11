@@ -1,10 +1,14 @@
+import jwt_decode from "jwt-decode";
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 import { RootState } from "../store";
 
 export interface User {
+  id: string;
   name: string;
   email: string;
   password: string;
+  age?: string;
+  goal?: string;
 }
 
 export interface UserResponse {
@@ -17,9 +21,10 @@ export interface LoginRequest {
   password: string;
 }
 
-export const api = createApi({
+export const userApi = createApi({
+  reducerPath: "userApi",
   baseQuery: fetchBaseQuery({
-    baseUrl: "http://localhost:5000/api/user",
+    baseUrl: `${process.env.API_URL}/api/user`,
     prepareHeaders: (headers, { getState }) => {
       // By default, if we have a token in the store, let's use that for authenticated requests
       const token = (getState() as RootState).auth.token;
@@ -41,7 +46,10 @@ export const api = createApi({
     protected: builder.mutation<{ message: string }, void>({
       query: () => "protected",
     }),
+    user: builder.query<User, string>({
+      query: (id) => `/${id}`,
+    }),
   }),
 });
 
-export const { useLoginMutation, useProtectedMutation } = api;
+export const { useLoginMutation, useProtectedMutation, useUserQuery } = userApi;

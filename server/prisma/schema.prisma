@@ -17,7 +17,6 @@ model User {
   password    String
   age        Int?
   goal      String?
-  token     String?
   isAdmin   Boolean @default(false)
   workouts    Workout[]
   progress    Progress[]
