@@ -8,7 +8,11 @@
   }
 
   .heading-brand {
-    @apply text-center text-gray-900 text-xl py-6 uppercase;
+    @apply text-center text-gray-900 text-xl py-6 uppercase font-bold;
+  }
+
+  .container-brand {
+    @apply mt-8 sm:mx-auto sm:w-full sm:max-w-md;
   }
 
   .form-brand-container {
@@ -20,11 +24,11 @@
   }
 
   .label-brand {
-    @apply block text-lg font-bold text-brand-700;
+    @apply block text-lg font-bold text-brand-700 mb-1;
   }
 
   .input-brand {
-    @apply rounded-xl w-full border-gray-400 focus:border-brand-700 focus:ring-brand-700;
+    @apply bg-gray-400 rounded-xl w-full border-gray-400 focus:border-brand-700 focus:ring-brand-700;
   }
 
   .error-brand {
@@ -33,7 +37,7 @@
 
   .button-brand {
     @apply w-full flex justify-center py-2 px-4 border border-transparent 
-    rounded-md shadow-sm text-sm font-medium text-white bg-brand-600 hover:bg-brand-700 
+    rounded-md shadow-sm text-base font-bold text-gray-200 bg-brand-600 hover:bg-brand-700 
     focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-brand-700;
   }
 }
