@@ -1,5 +1,11 @@
 import Link from "next/link";
+import { useRouter } from "next/router";
 import { useForm, SubmitHandler } from "react-hook-form";
+import { setCredentials } from "../app/features/auth/authSlice";
+import { useDispatch } from "react-redux";
+
+import { useLoginMutation } from "../app/services/auth";
+import type { LoginRequest } from "../app/services/auth";
 
 interface LoginInputs {
   email: string;
@@ -7,14 +13,31 @@ interface LoginInputs {
 }
 
 const Login = () => {
+  const dispatch = useDispatch();
+
+  const router = useRouter();
+
+  const [login, { isLoading }] = useLoginMutation();
+
+  console.log(isLoading);
+
   const {
     register,
     handleSubmit,
     watch,
     formState: { errors },
-  } = useForm<LoginInputs>();
+  } = useForm<LoginRequest>();
 
-  const onLoginSubmit: SubmitHandler<LoginInputs> = (data) => console.log(data);
+  const onLoginSubmit: SubmitHandler<LoginRequest> = async (data) => {
+    try {
+      const user = await login(data).unwrap();
+      dispatch(setCredentials(user));
+      console.log(user);
+      router.push("/");
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
   return (
     <>

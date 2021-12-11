@@ -60,26 +60,33 @@ const loginUser = async (req: Request, res: Response) => {
   try {
     const { email, password } = req.body;
 
-    const user = await prisma.user.findMany({
+    const user = await prisma.user.findUnique({
       where: {
-        email: {
-          equals: email,
-        },
+        email: email,
+      },
+      select: {
+        id: true,
+        name: true,
+        email: true,
+        password: true,
+        age: true,
+        goal: true,
+        token: true,
       },
     });
 
-    if (Object.keys(user).length === 0) {
+    if (!user) {
       res.status(404).json("User not registered");
     }
 
-    const checkPassword = bcrypt.compareSync(password, user[0].password);
+    const checkPassword = bcrypt.compareSync(password, user.password);
 
     if (!checkPassword) {
       res.status(401).json("Email address or password invalid");
     }
 
-    res.cookie("token", generateToken(user[0].id));
-    user[0].token = generateToken(user[0].id);
+    res.cookie("token", generateToken(user.id));
+    user.token = generateToken(user.id);
 
     if (user) {
       res.status(200).json(user);
