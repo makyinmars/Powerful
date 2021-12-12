@@ -44,4 +44,17 @@
   .error-handling {
     @apply text-center font-bold text-red-400 text-lg;
   }
+
+  .menu-button {
+    @apply capitalize inline-flex justify-center items-center;
+  }
+
+  .menu-items {
+    @apply absolute right-0 w-20 mt-2 text-brand-400 origin-top-right divide-y divide-gray-100 
+    rounded-md shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none font-bold p-2;
+  }
+
+  .menu-item-active {
+    @apply flex rounded-md items-center w-full px-2 py-2;
+  }
 }

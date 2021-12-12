@@ -1,14 +1,29 @@
 import { FaDumbbell } from "react-icons/fa";
 import Link from "next/link";
+import { useAppSelector } from "../app/hooks";
+import DropdownUser from "./dropdownUser";
 
 const Navbar = () => {
+  const { user } = useAppSelector((state) => state.auth);
+  console.log(user);
+
   return (
     <>
       <NavbarList href="/">
         <FaDumbbell size="32" />
       </NavbarList>
-      <NavbarList href="/register">Register</NavbarList>
-      <NavbarList href="/login">Login</NavbarList>
+      {user?.id !== "" ? (
+        <>
+          <NavbarList href="/workout">Workouts</NavbarList>
+          <NavbarList href="/progress">Progress</NavbarList>
+          <DropdownUser name={user?.name ?? ""} />
+        </>
+      ) : (
+        <>
+          <NavbarList href="/register">Register</NavbarList>
+          <NavbarList href="/login">Login</NavbarList>
+        </>
+      )}
     </>
   );
 };

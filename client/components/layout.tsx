@@ -10,7 +10,7 @@ const Layout = ({ children }: LayoutProps) => {
     <div className="h-full flex flex-col">
       {/* Header */}
 
-      <header className="flex items-center justify-around h-12 px-2">
+      <header className="flex items-center justify-around h-12 pt-5">
         <Navbar />
       </header>
 
