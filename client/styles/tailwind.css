@@ -40,4 +40,8 @@
     rounded-md shadow-sm text-base font-bold text-gray-200 bg-brand-600 hover:bg-brand-700 
     focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-brand-700;
   }
+
+  .error-handling {
+    @apply text-center font-bold text-red-400 text-lg;
+  }
 }

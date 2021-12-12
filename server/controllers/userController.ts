@@ -84,7 +84,11 @@ const loginUser = async (req: Request, res: Response) => {
       res.status(401).json("Email address or password invalid");
     }
 
-    res.cookie("token", generateToken(user.id));
+    res.cookie("token", generateToken(user.id), {
+      maxAge: 60 * 60 * 24 * 60,
+      httpOnly: true,
+    });
+
     const token = generateToken(user.id);
 
     if (user) {

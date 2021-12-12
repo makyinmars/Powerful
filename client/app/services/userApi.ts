@@ -1,5 +1,9 @@
 import jwt_decode from "jwt-decode";
-import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
+import {
+  createApi,
+  fetchBaseQuery,
+  FetchBaseQueryError,
+} from "@reduxjs/toolkit/query/react";
 import { RootState } from "../store";
 
 export interface User {
@@ -51,5 +55,9 @@ export const userApi = createApi({
     }),
   }),
 });
+
+export const isFetchBaseQueryErrorType = (
+  error: any
+): error is FetchBaseQueryError => "status" in error;
 
 export const { useLoginMutation, useProtectedMutation, useUserQuery } = userApi;
