@@ -1,6 +1,5 @@
-import Link from "next/link";
-import { FaDumbbell } from "react-icons/fa";
 import Logo from "./logo";
+import Navbar from "./navbar";
 
 interface LayoutProps {
   children: React.ReactNode;
@@ -12,11 +11,7 @@ const Layout = ({ children }: LayoutProps) => {
       {/* Header */}
 
       <header className="flex items-center justify-around h-12 px-2">
-        <Navbar href="/">
-          <FaDumbbell size="32" />
-        </Navbar>
-        <Navbar href="/register">Register</Navbar>
-        <Navbar href="/login">Login</Navbar>
+        <Navbar />
       </header>
 
       {/* Main */}
@@ -39,18 +34,3 @@ const Layout = ({ children }: LayoutProps) => {
 };
 
 export default Layout;
-
-interface NavbarProps {
-  children: React.ReactNode;
-  href: string;
-}
-
-const Navbar = ({ children, href }: NavbarProps) => {
-  return (
-    <>
-      <Link href={href}>
-        <a className="title-brand">{children}</a>
-      </Link>
-    </>
-  );
-};
