@@ -15,19 +15,11 @@ const DropdownUser = ({ name, id }: DropdownUserProps) => {
   return (
     <Menu as="div" className="relative inline-block text-left">
       <div>
-        <Menu.Button className="title-brand menu-button button-brand">
-          {/* User is logged in display name else display login and register*/}
-
-          {name !== "" ? (
-            <>
-              {name} <HiChevronDown size="20" />
-            </>
-          ) : (
-            <>
-              Options <HiChevronDown />
-            </>
-          )}
-        </Menu.Button>
+        {name !== "" ? (
+          <MenuButton text={name} />
+        ) : (
+          <MenuButton text="Options" css="menu-item-hidden" />
+        )}
       </div>
 
       <Transition
@@ -47,8 +39,16 @@ const DropdownUser = ({ name, id }: DropdownUserProps) => {
             <>
               {/* It would display on only on mobile devices*/}
               <MenuItem text="Profile" routerLink={`/user/${id}`} />
-              <MenuItem text="Workout" routerLink="/workout" />
-              <MenuItem text="Progress" routerLink="/progress" />
+              <MenuItem
+                text="Workout"
+                routerLink="/workout"
+                css="menu-item-hidden"
+              />
+              <MenuItem
+                text="Progress"
+                routerLink="/progress"
+                css="menu-item-hidden"
+              />
               <MenuItem text="Logout" routerLink="/" />
             </>
           ) : (
@@ -65,12 +65,27 @@ const DropdownUser = ({ name, id }: DropdownUserProps) => {
 
 export default DropdownUser;
 
+interface MenuButtonProps {
+  text: string;
+  css?: string;
+}
+
+const MenuButton = ({ text, css }: MenuButtonProps) => {
+  return (
+    <Menu.Button className={`title-brand menu-button button-brand ${css}`}>
+      {/* User is logged in display name else display login and register*/}
+      {text} <HiChevronDown size="20" />
+    </Menu.Button>
+  );
+};
+
 interface MenuItemProps {
   text: string;
   routerLink: string;
+  css?: string;
 }
 
-const MenuItem = ({ text, routerLink }: MenuItemProps) => {
+const MenuItem = ({ text, routerLink, css }: MenuItemProps) => {
   const router = useRouter();
   const dispatch = useAppDispatch();
 
@@ -94,7 +109,7 @@ const MenuItem = ({ text, routerLink }: MenuItemProps) => {
           <button
             className={`${
               active && "bg-brand-500 text-white"
-            } menu-item-active`}
+            } menu-item-active ${css}`}
             onClick={onClickHandler}
           >
             {text}
