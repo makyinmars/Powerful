@@ -1,52 +1,50 @@
-import Link from "next/link";
+import React from "react";
 import { useForm, SubmitHandler } from "react-hook-form";
-import { useRouter } from "next/router";
 
-import { setCredentials } from "../app/features/auth/authSlice";
-import { useAppDispatch } from "../app/hooks";
-import { useRegisterUserMutation } from "../app/services/userApi";
-import type { RegisterRequest } from "../app/services/userApi";
-import ErrorHandling from "../components/errorQuery";
-import Spinner from "../components/spinner";
+import ErrorQueryHandling from "./errorQuery";
+import Spinner from "./spinner";
 
-const Register = () => {
-  const dispatch = useAppDispatch();
+interface UserInfoProps {
+  data: {
+    name: string;
 
-  const router = useRouter();
+    email: string;
+    password: string;
+    age?: string;
+    goal?: string;
+  };
+  isLoading: boolean;
+  isError: boolean;
+  error: any; // Expected to be a { status: 2xx, message: error message }
+}
 
-  const [registerUser, { isLoading, isError, error }] =
-    useRegisterUserMutation();
+interface UserInfoRequest {
+  name: string;
+  email: string;
+  password: string;
+  age?: string;
+  goal?: string;
+}
 
+const UserInfo = ({ data, isLoading, isError, error }: UserInfoProps) => {
   const {
     register,
     handleSubmit,
     watch,
     formState: { errors },
-  } = useForm<RegisterRequest>();
+  } = useForm<UserInfoRequest>();
 
-  const onRegisterSubmit: SubmitHandler<RegisterRequest> = async (data) => {
-    try {
-      const user = await registerUser(data).unwrap();
-      dispatch(setCredentials(user));
-      router.push("/user/test");
-    } catch (error) {
-      console.log(error);
-    }
-  };
+  const onUserInfoSubmit: SubmitHandler<UserInfoRequest> = async (data) =>
+    console.log(data);
 
   return (
     <>
-      <h1 className="heading-brand">Create your account</h1>
-      <p className="text-center">
-        Already registered?{" "}
-        <Link href="/login">
-          <a className="title-brand">Login</a>
-        </Link>
-      </p>
+      <h1 className="heading-brand">User Information</h1>
+
       <div className="container-brand">
         <div className="form-brand-container">
           <form
-            onSubmit={handleSubmit(onRegisterSubmit)}
+            onSubmit={handleSubmit(onUserInfoSubmit)}
             className="form-brand"
           >
             {/* Name */}
@@ -59,6 +57,7 @@ const Register = () => {
               type="text"
               {...register("name", { required: "The name is required" })}
               className="input-brand"
+              defaultValue={data.name}
             />
             {errors.name && (
               <span className="error-brand">{errors.name.message}</span>
@@ -75,6 +74,7 @@ const Register = () => {
               type="email"
               {...register("email", { required: "The email is required" })}
               className="input-brand"
+              defaultValue={data.email}
             />
             {errors.email && (
               <span className="error-brand">{errors.email.message}</span>
@@ -95,11 +95,49 @@ const Register = () => {
                 },
               })}
               className="input-brand"
+              defaultValue={data.password}
             />
 
             {errors.password && (
               <span className="error-brand">{errors.password.message}</span>
             )}
+
+            {/* Age */}
+
+            <label htmlFor="age" className="label-brand">
+              Age
+            </label>
+            <input
+              type="number"
+              {...register("age", {
+                min: {
+                  value: 5,
+                  message: "Age must be greater than 5",
+                },
+                max: {
+                  value: 99,
+                  message: "Age must be less than 99",
+                },
+              })}
+              className="input-brand"
+              defaultValue={data.age}
+            />
+
+            {errors.age && (
+              <span className="error-brand">{errors.age.message}</span>
+            )}
+
+            {/* Goal */}
+
+            <label htmlFor="goal" className="label-brand">
+              Goal
+            </label>
+            <input
+              type="text"
+              {...register("goal")}
+              className="input-brand"
+              defaultValue={data.goal}
+            />
 
             {/* Submit */}
             <button type="submit" className="button-brand">
@@ -108,7 +146,7 @@ const Register = () => {
 
             {/* Status */}
             {isLoading && <Spinner />}
-            {isError ? <ErrorHandling error={error} /> : null}
+            {isError ? <ErrorQueryHandling error={error} /> : null}
           </form>
         </div>
       </div>
@@ -116,4 +154,4 @@ const Register = () => {
   );
 };
 
-export default Register;
+export default UserInfo;

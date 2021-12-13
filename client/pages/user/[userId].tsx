@@ -1,13 +1,31 @@
 import React from "react";
-import { useRouter } from "next/router";
+
+import { useAppSelector } from "../../app/hooks";
+import { useUserQuery } from "../../app/services/userApi";
+import ErrorQueryHandling from "../../components/errorQuery";
+import UserInfo from "../../components/userInfo";
 
 const UserId = () => {
-  const router = useRouter();
+  const { user } = useAppSelector((state) => state.auth);
 
-  const { userId } = router.query;
+  const { data, isError, isLoading, isSuccess, error } = useUserQuery(
+    user?.id ?? ""
+  );
 
-  console.log(userId);
-  return <div></div>;
+  return (
+    <>
+      {data ? (
+        <UserInfo
+          data={data}
+          isError={isError}
+          isLoading={isLoading}
+          error={error}
+        />
+      ) : isError ? (
+        <ErrorQueryHandling error={error} />
+      ) : null}
+    </>
+  );
 };
 
 export default UserId;

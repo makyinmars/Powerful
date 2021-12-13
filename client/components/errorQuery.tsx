@@ -5,7 +5,7 @@ interface ErrorHandlingProps {
   error: any;
 }
 
-const ErrorHandling = ({ error }: ErrorHandlingProps) => {
+const ErrorQueryHandling = ({ error }: ErrorHandlingProps) => {
   const isFetchBaseQueryErrorType = (
     error: any
   ): error is FetchBaseQueryError => "status" in error;
@@ -17,4 +17,4 @@ const ErrorHandling = ({ error }: ErrorHandlingProps) => {
   );
 };
 
-export default ErrorHandling;
+export default ErrorQueryHandling;

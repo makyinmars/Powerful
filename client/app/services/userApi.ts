@@ -59,9 +59,6 @@ export const userApi = createApi({
         body: { email, password },
       }),
     }),
-    protected: builder.mutation<{ message: string }, void>({
-      query: () => "protected",
-    }),
     user: builder.query<User, string>({
       query: (id) => `/${id}`,
     }),
@@ -72,9 +69,5 @@ export const isFetchBaseQueryErrorType = (
   error: any
 ): error is FetchBaseQueryError => "status" in error;
 
-export const {
-  useLoginMutation,
-  useRegisterUserMutation,
-  useProtectedMutation,
-  useUserQuery,
-} = userApi;
+export const { useLoginMutation, useRegisterUserMutation, useUserQuery } =
+  userApi;

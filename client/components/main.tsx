@@ -1,8 +1,10 @@
 import { mainBullets } from "../data/mainBullets";
+import Logo from "./logo";
 
 const Main = () => {
   return (
     <>
+      <Logo />
       <div className="flex justify-center flex-col items-center">
         <div className="flex flex-col items-center gap-4">
           <p className="px-4">

@@ -1,4 +1,3 @@
-import Logo from "./logo";
 import Navbar from "./navbar";
 
 interface LayoutProps {
@@ -16,10 +15,7 @@ const Layout = ({ children }: LayoutProps) => {
 
       {/* Main */}
 
-      <main className="h-full">
-        <Logo />
-        {children}
-      </main>
+      <main className="h-full">{children}</main>
 
       {/* Footer */}
 
