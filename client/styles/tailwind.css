@@ -42,7 +42,7 @@
   }
 
   .error-handling {
-    @apply text-center font-bold text-red-400 text-lg;
+    @apply text-center font-bold text-red-400 text-lg py-4;
   }
 
   .menu-button {

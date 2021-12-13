@@ -1,34 +1,11 @@
-import {
-  createApi,
-  fetchBaseQuery,
-  FetchBaseQueryError,
-} from "@reduxjs/toolkit/query/react";
+import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 import { RootState } from "../store";
-
-export interface User {
-  id: string;
-  name: string;
-  email: string;
-  password: string;
-  age?: string;
-  goal?: string;
-}
-
-export interface UserResponse {
-  user: User;
-  token: string;
-}
-
-export interface LoginRequest {
-  email: string;
-  password: string;
-}
-
-export interface RegisterRequest {
-  name: string;
-  email: string;
-  password: string;
-}
+import {
+  User,
+  AuthResponse,
+  LoginRequest,
+  RegisterRequest,
+} from "./interfaces/userInterface";
 
 export const userApi = createApi({
   reducerPath: "userApi",
@@ -44,30 +21,50 @@ export const userApi = createApi({
       return headers;
     },
   }),
+  tagTypes: ["User"],
   endpoints: (builder) => ({
-    registerUser: builder.mutation<UserResponse, RegisterRequest>({
+    registerUser: builder.mutation<AuthResponse, RegisterRequest>({
       query: ({ name, email, password }) => ({
         url: "/register",
         method: "POST",
         body: { name, email, password },
       }),
+      invalidatesTags: ["User"],
     }),
-    login: builder.mutation<UserResponse, LoginRequest>({
+    login: builder.mutation<AuthResponse, LoginRequest>({
       query: ({ email, password }) => ({
         url: "/login",
         method: "POST",
         body: { email, password },
       }),
+      invalidatesTags: ["User"],
     }),
-    user: builder.query<User, string>({
+    getUser: builder.query<User, string>({
       query: (id) => `/${id}`,
+      providesTags: ["User"],
+    }),
+    updateUser: builder.mutation<void, User>({
+      query: ({ id, ...rest }) => ({
+        url: `/${id}`,
+        method: "PUT",
+        body: rest,
+      }),
+      invalidatesTags: ["User"],
+    }),
+    deleteUser: builder.mutation<void, string>({
+      query: (id) => ({
+        url: `/${id}`,
+        method: "DELETE",
+      }),
+      invalidatesTags: ["User"],
     }),
   }),
 });
 
-export const isFetchBaseQueryErrorType = (
-  error: any
-): error is FetchBaseQueryError => "status" in error;
-
-export const { useLoginMutation, useRegisterUserMutation, useUserQuery } =
-  userApi;
+export const {
+  useLoginMutation,
+  useRegisterUserMutation,
+  useGetUserQuery,
+  useUpdateUserMutation,
+  useDeleteUserMutation,
+} = userApi;

@@ -1,29 +1,15 @@
 import React from "react";
 import { useForm, SubmitHandler } from "react-hook-form";
 
+import { User } from "../app/services/interfaces/userInterface";
 import ErrorQueryHandling from "./errorQuery";
 import Spinner from "./spinner";
 
 interface UserInfoProps {
-  data: {
-    name: string;
-
-    email: string;
-    password: string;
-    age?: string;
-    goal?: string;
-  };
+  data: User;
   isLoading: boolean;
   isError: boolean;
   error: any; // Expected to be a { status: 2xx, message: error message }
-}
-
-interface UserInfoRequest {
-  name: string;
-  email: string;
-  password: string;
-  age?: string;
-  goal?: string;
 }
 
 const UserInfo = ({ data, isLoading, isError, error }: UserInfoProps) => {
@@ -32,9 +18,15 @@ const UserInfo = ({ data, isLoading, isError, error }: UserInfoProps) => {
     handleSubmit,
     watch,
     formState: { errors },
-  } = useForm<UserInfoRequest>();
+  } = useForm<User>();
 
-  const onUserInfoSubmit: SubmitHandler<UserInfoRequest> = async (data) =>
+  const onUserInfoSubmit: SubmitHandler<User> = async (data) =>
+    console.log(data);
+
+  const onUpdateUserSubmit: SubmitHandler<User> = async (data) =>
+    console.log(data);
+
+  const onDeleteUserSubmit: SubmitHandler<User> = async (data) =>
     console.log(data);
 
   return (
@@ -43,10 +35,7 @@ const UserInfo = ({ data, isLoading, isError, error }: UserInfoProps) => {
 
       <div className="container-brand">
         <div className="form-brand-container">
-          <form
-            onSubmit={handleSubmit(onUserInfoSubmit)}
-            className="form-brand"
-          >
+          <form className="form-brand">
             {/* Name */}
 
             <label htmlFor="name" className="label-brand">
@@ -140,8 +129,19 @@ const UserInfo = ({ data, isLoading, isError, error }: UserInfoProps) => {
             />
 
             {/* Submit */}
-            <button type="submit" className="button-brand">
-              Register
+            <button
+              type="submit"
+              className="button-brand"
+              onClick={handleSubmit(onUpdateUserSubmit)}
+            >
+              Update
+            </button>
+            <button
+              type="submit"
+              className="button-brand"
+              onClick={handleSubmit(onDeleteUserSubmit)}
+            >
+              Delete
             </button>
 
             {/* Status */}
