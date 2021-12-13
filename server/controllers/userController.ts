@@ -146,6 +146,8 @@ const updateUserById = async (req: Request, res: Response) => {
     const { id } = req.params;
     const { email, password, name, age, goal } = req.body;
 
+    const hashPassword = await bcrypt.hash(password, 10);
+
     const user = await prisma.user.update({
       where: {
         id: id,
@@ -153,7 +155,7 @@ const updateUserById = async (req: Request, res: Response) => {
       data: {
         name: name,
         email: email,
-        password: password,
+        password: hashPassword,
         age: age,
         goal: goal,
       },

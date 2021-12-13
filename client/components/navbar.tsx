@@ -5,23 +5,23 @@ import DropdownUser from "./dropdownUser";
 
 const Navbar = () => {
   const { user } = useAppSelector((state) => state.auth);
-  console.log(user);
 
   return (
     <>
       <NavbarList href="/">
         <FaDumbbell size="32" />
       </NavbarList>
-      {user?.id !== "" ? (
+      {user?.id !== undefined ? (
         <>
           <NavbarList href="/workout">Workouts</NavbarList>
           <NavbarList href="/progress">Progress</NavbarList>
-          <DropdownUser name={user?.name ?? ""} />
+          <DropdownUser name={user?.name ?? ""} id={user?.id ?? ""} />
         </>
       ) : (
         <>
           <NavbarList href="/register">Register</NavbarList>
           <NavbarList href="/login">Login</NavbarList>
+          <DropdownUser name={""} id={""} />
         </>
       )}
     </>
@@ -39,7 +39,9 @@ const NavbarList = ({ children, href }: NavbarListProps) => {
   return (
     <>
       <Link href={href}>
-        <a className="title-brand">{children}</a>
+        <a className={`${href !== "/" && "navbar-list-hidden"} title-brand`}>
+          {children}
+        </a>
       </Link>
     </>
   );
