@@ -45,6 +45,10 @@
     @apply text-center font-bold text-red-400 text-lg py-4;
   }
 
+  .success-handling {
+    @apply text-center font-bold text-green-700 text-lg py-4;
+  }
+
   .menu-button {
     @apply capitalize inline-flex justify-center items-center;
   }

@@ -5,7 +5,7 @@ import { useRouter } from "next/router";
 import { setCredentials } from "../app/features/auth/authSlice";
 import { useAppDispatch } from "../app/hooks";
 import { useRegisterUserMutation } from "../app/services/userApi";
-import type { RegisterRequest } from "../app/services/userApi";
+import type { RegisterRequest } from "../app/services/interfaces/userInterface";
 import ErrorHandling from "../components/errorQuery";
 import Spinner from "../components/spinner";
 
@@ -28,7 +28,7 @@ const Register = () => {
     try {
       const user = await registerUser(data).unwrap();
       dispatch(setCredentials(user));
-      router.push("/user/test");
+      router.push("/");
     } catch (error) {
       console.log(error);
     }

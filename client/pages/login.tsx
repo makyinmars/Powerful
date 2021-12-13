@@ -5,7 +5,7 @@ import { setCredentials } from "../app/features/auth/authSlice";
 import { useDispatch } from "react-redux";
 
 import { useLoginMutation } from "../app/services/userApi";
-import type { LoginRequest } from "../app/services/userApi";
+import type { LoginRequest } from "../app/services/interfaces/userInterface";
 import ErrorHandling from "../components/errorQuery";
 import Spinner from "../components/spinner";
 
@@ -27,7 +27,7 @@ const Login = () => {
     try {
       const user = await login(data).unwrap();
       dispatch(setCredentials(user));
-      router.push("/user/test");
+      router.push("/");
     } catch (error) {
       console.log(error);
     }

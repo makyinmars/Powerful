@@ -144,11 +144,27 @@ const getUserById = async (req: Request, res: Response) => {
 const updateUserById = async (req: Request, res: Response) => {
   try {
     const { id } = req.params;
+
+    const user = await prisma.user.findUnique({
+      where: {
+        id: id,
+      },
+      select: {
+        password: true,
+      },
+    });
+
     const { email, password, name, age, goal } = req.body;
 
-    const hashPassword = await bcrypt.hash(password, 10);
+    let hashPassword: string;
 
-    const user = await prisma.user.update({
+    if (password !== "") {
+      hashPassword = await bcrypt.hash(password, 10);
+    } else {
+      hashPassword = user.password;
+    }
+
+    const updatedUser = await prisma.user.update({
       where: {
         id: id,
       },
@@ -161,8 +177,8 @@ const updateUserById = async (req: Request, res: Response) => {
       },
     });
 
-    if (user) {
-      res.status(200).json(user);
+    if (updatedUser) {
+      res.status(200).json(updatedUser);
     }
   } catch (error) {
     if (error instanceof Prisma.PrismaClientKnownRequestError) {

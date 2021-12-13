@@ -1,9 +1,17 @@
+import { useRouter } from "next/router";
 import React from "react";
 import { useForm, SubmitHandler } from "react-hook-form";
 
 import { User } from "../app/services/interfaces/userInterface";
+import {
+  useUpdateUserMutation,
+  useDeleteUserMutation,
+} from "../app/services/userApi";
+import { removeCredentials } from "../app/features/auth/authSlice";
+import { useAppDispatch } from "../app/hooks";
 import ErrorQueryHandling from "./errorQuery";
 import Spinner from "./spinner";
+import SuccessQueryHandling from "./successQuery";
 
 interface UserInfoProps {
   data: User;
@@ -13,6 +21,9 @@ interface UserInfoProps {
 }
 
 const UserInfo = ({ data, isLoading, isError, error }: UserInfoProps) => {
+  const router = useRouter();
+  const dispatch = useAppDispatch();
+
   const {
     register,
     handleSubmit,
@@ -20,14 +31,39 @@ const UserInfo = ({ data, isLoading, isError, error }: UserInfoProps) => {
     formState: { errors },
   } = useForm<User>();
 
-  const onUserInfoSubmit: SubmitHandler<User> = async (data) =>
-    console.log(data);
+  const id = data.id;
 
-  const onUpdateUserSubmit: SubmitHandler<User> = async (data) =>
-    console.log(data);
+  // Update User Query
+  const [updateUser, { isSuccess: isSuccessUpdate }] = useUpdateUserMutation();
 
-  const onDeleteUserSubmit: SubmitHandler<User> = async (data) =>
-    console.log(data);
+  // Delete User Query
+  const [deleteUser] = useDeleteUserMutation();
+
+  const onUpdateUserSubmit: SubmitHandler<User> = async (data) => {
+    try {
+      const { name, email, password, goal, age } = data;
+      await updateUser({
+        id,
+        name,
+        email,
+        password,
+        goal,
+        age,
+      }).unwrap();
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  const onDeleteUserSubmit: SubmitHandler<User> = async () => {
+    try {
+      await deleteUser(id);
+      dispatch(removeCredentials());
+      router.push("/");
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
   return (
     <>
@@ -77,14 +113,13 @@ const UserInfo = ({ data, isLoading, isError, error }: UserInfoProps) => {
             <input
               type="password"
               {...register("password", {
-                required: "The password is required",
                 minLength: {
                   value: 6,
                   message: "Minimum length must be at least 6 characters",
                 },
               })}
               className="input-brand"
-              defaultValue={data.password}
+              placeholder="*******"
             />
 
             {errors.password && (
@@ -99,6 +134,7 @@ const UserInfo = ({ data, isLoading, isError, error }: UserInfoProps) => {
             <input
               type="number"
               {...register("age", {
+                valueAsNumber: true,
                 min: {
                   value: 5,
                   message: "Age must be greater than 5",
@@ -147,6 +183,9 @@ const UserInfo = ({ data, isLoading, isError, error }: UserInfoProps) => {
             {/* Status */}
             {isLoading && <Spinner />}
             {isError ? <ErrorQueryHandling error={error} /> : null}
+            {isSuccessUpdate && (
+              <SuccessQueryHandling text="User Information Updated" />
+            )}
           </form>
         </div>
       </div>

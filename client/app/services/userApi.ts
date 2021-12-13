@@ -44,10 +44,10 @@ export const userApi = createApi({
       providesTags: ["User"],
     }),
     updateUser: builder.mutation<void, User>({
-      query: ({ id, ...rest }) => ({
+      query: ({ id, name, email, password, goal, age }) => ({
         url: `/${id}`,
         method: "PUT",
-        body: rest,
+        body: { name, email, password, goal, age },
       }),
       invalidatesTags: ["User"],
     }),
