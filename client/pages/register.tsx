@@ -1,22 +1,38 @@
 import Link from "next/link";
 import { useForm, SubmitHandler } from "react-hook-form";
+import { useRouter } from "next/router";
 
-interface RegisterInputs {
-  name: string;
-  email: string;
-  password: string;
-}
+import { setCredentials } from "../app/features/auth/authSlice";
+import { useAppDispatch } from "../app/hooks";
+import { useRegisterUserMutation } from "../app/services/userApi";
+import type { RegisterRequest } from "../app/services/userApi";
+import ErrorHandling from "../components/errorQuery";
+import Spinner from "../components/spinner";
 
 const Register = () => {
+  const dispatch = useAppDispatch();
+
+  const router = useRouter();
+
+  const [registerUser, { isLoading, isError, error }] =
+    useRegisterUserMutation();
+
   const {
     register,
     handleSubmit,
     watch,
     formState: { errors },
-  } = useForm<RegisterInputs>();
+  } = useForm<RegisterRequest>();
 
-  const onRegisterSubmit: SubmitHandler<RegisterInputs> = (data) =>
-    console.log(data);
+  const onRegisterSubmit: SubmitHandler<RegisterRequest> = async (data) => {
+    try {
+      const user = await registerUser(data).unwrap();
+      dispatch(setCredentials(user));
+      router.push("/user/test");
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
   return (
     <>
@@ -89,6 +105,10 @@ const Register = () => {
             <button type="submit" className="button-brand">
               Register
             </button>
+
+            {/* Status */}
+            {isLoading && <Spinner />}
+            {isError ? <ErrorHandling error={error} /> : null}
           </form>
         </div>
       </div>

@@ -24,6 +24,12 @@ export interface LoginRequest {
   password: string;
 }
 
+export interface RegisterRequest {
+  name: string;
+  email: string;
+  password: string;
+}
+
 export const userApi = createApi({
   reducerPath: "userApi",
   baseQuery: fetchBaseQuery({
@@ -39,6 +45,13 @@ export const userApi = createApi({
     },
   }),
   endpoints: (builder) => ({
+    registerUser: builder.mutation<UserResponse, RegisterRequest>({
+      query: ({ name, email, password }) => ({
+        url: "/register",
+        method: "POST",
+        body: { name, email, password },
+      }),
+    }),
     login: builder.mutation<UserResponse, LoginRequest>({
       query: ({ email, password }) => ({
         url: "/login",
@@ -59,4 +72,9 @@ export const isFetchBaseQueryErrorType = (
   error: any
 ): error is FetchBaseQueryError => "status" in error;
 
-export const { useLoginMutation, useProtectedMutation, useUserQuery } = userApi;
+export const {
+  useLoginMutation,
+  useRegisterUserMutation,
+  useProtectedMutation,
+  useUserQuery,
+} = userApi;

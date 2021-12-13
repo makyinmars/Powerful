@@ -6,13 +6,15 @@ import { useDispatch } from "react-redux";
 
 import { useLoginMutation } from "../app/services/userApi";
 import type { LoginRequest } from "../app/services/userApi";
+import ErrorHandling from "../components/errorQuery";
+import Spinner from "../components/spinner";
 
 const Login = () => {
   const dispatch = useDispatch();
 
   const router = useRouter();
 
-  const [login, { isLoading, data }] = useLoginMutation();
+  const [login, { isLoading, isError, error }] = useLoginMutation();
 
   const {
     register,
@@ -87,6 +89,10 @@ const Login = () => {
             <button type="submit" className="button-brand">
               Login
             </button>
+
+            {/* Status */}
+            {isLoading && <Spinner />}
+            {isError ? <ErrorHandling error={error} /> : null}
           </form>
         </div>
       </div>
