@@ -12,38 +12,6 @@ interface DropdownUserProps {
 }
 
 const DropdownUser = ({ name, id }: DropdownUserProps) => {
-  const router = useRouter();
-
-  const dispatch = useAppDispatch();
-
-  const profileHandler = () => {
-    router.push(`/user/${id}`);
-  };
-  const workoutHandler = () => {
-    router.push(`/workout/${id}`);
-  };
-
-  const progressHandler = () => {
-    router.push(`/progress/${id}`);
-  };
-
-  const loginHandler = () => {
-    router.push("/login");
-  };
-
-  const registerHandler = () => {
-    router.push("/register");
-  };
-
-  const logoutHandler = () => {
-    try {
-      dispatch(removeCredentials());
-      router.push("/");
-    } catch (error) {
-      console.log(error);
-    }
-  };
-
   return (
     <Menu as="div" className="relative inline-block text-left">
       <div>
@@ -61,6 +29,7 @@ const DropdownUser = ({ name, id }: DropdownUserProps) => {
           )}
         </Menu.Button>
       </div>
+
       <Transition
         as={Fragment}
         enter="transition ease-out duration-100"
@@ -76,87 +45,16 @@ const DropdownUser = ({ name, id }: DropdownUserProps) => {
 
           {name !== "" ? (
             <>
-              <Menu.Item>
-                {({ active }) => (
-                  <button
-                    className={`${
-                      active && "bg-brand-500 text-white"
-                    } menu-item-active`}
-                    onClick={profileHandler}
-                  >
-                    Profile
-                  </button>
-                )}
-              </Menu.Item>
-
               {/* It would display on only on mobile devices*/}
-              <Menu.Item>
-                {({ active }) => (
-                  <button
-                    className={`${
-                      active && "bg-brand-500 text-white"
-                    } menu-item-active menu-item-hidden`}
-                    onClick={workoutHandler}
-                  >
-                    Workout
-                  </button>
-                )}
-              </Menu.Item>
-
-              {/* It would display on only on mobile devices*/}
-              <Menu.Item>
-                {({ active }) => (
-                  <button
-                    className={`${
-                      active && "bg-brand-500 text-white"
-                    } menu-item-active menu-item-hidden`}
-                    onClick={progressHandler}
-                  >
-                    Progress
-                  </button>
-                )}
-              </Menu.Item>
-
-              <Menu.Item>
-                {({ active }) => (
-                  <button
-                    className={`${
-                      active && "bg-brand-500 text-white"
-                    } menu-item-active`}
-                    onClick={logoutHandler}
-                  >
-                    Logout
-                  </button>
-                )}
-              </Menu.Item>
+              <MenuItem text="Profile" routerLink={`/user/${id}`} />
+              <MenuItem text="Workout" routerLink="/workout" />
+              <MenuItem text="Progress" routerLink="/progress" />
+              <MenuItem text="Logout" routerLink="/" />
             </>
           ) : (
             <>
-              <Menu.Item>
-                {({ active }) => (
-                  <button
-                    className={`${
-                      active && "bg-brand-500 text-white"
-                    } menu-item-active menu-item-hidden`}
-                    onClick={loginHandler}
-                  >
-                    Login
-                  </button>
-                )}
-              </Menu.Item>
-
-              <Menu.Item>
-                {({ active }) => (
-                  <button
-                    className={`${
-                      active && "bg-brand-500 text-white"
-                    } menu-item-active`}
-                    onClick={registerHandler}
-                  >
-                    Register
-                  </button>
-                )}
-              </Menu.Item>
+              <MenuItem text="Login" routerLink="/login" />
+              <MenuItem text="Register" routerLink="/register" />
             </>
           )}
         </Menu.Items>
@@ -166,6 +64,46 @@ const DropdownUser = ({ name, id }: DropdownUserProps) => {
 };
 
 export default DropdownUser;
+
+interface MenuItemProps {
+  text: string;
+  routerLink: string;
+}
+
+const MenuItem = ({ text, routerLink }: MenuItemProps) => {
+  const router = useRouter();
+  const dispatch = useAppDispatch();
+
+  const onClickHandler = () => {
+    if (routerLink === "/") {
+      try {
+        dispatch(removeCredentials());
+        router.push(routerLink);
+      } catch (error) {
+        console.log(error);
+      }
+    } else {
+      router.push(routerLink);
+    }
+  };
+
+  return (
+    <>
+      <Menu.Item>
+        {({ active }) => (
+          <button
+            className={`${
+              active && "bg-brand-500 text-white"
+            } menu-item-active`}
+            onClick={onClickHandler}
+          >
+            {text}
+          </button>
+        )}
+      </Menu.Item>
+    </>
+  );
+};
 
 // Disable button example
 // <Menu.Item disabled>
