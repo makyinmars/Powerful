@@ -9,7 +9,7 @@ import type { LoginRequest } from "../app/services/interfaces/userInterface";
 import ErrorHandling from "../components/errorQuery";
 import Spinner from "../components/spinner";
 
-const Login = () => {
+const LoginPage = () => {
   const dispatch = useDispatch();
 
   const router = useRouter();
@@ -100,4 +100,4 @@ const Login = () => {
   );
 };
 
-export default Login;
+export default LoginPage;

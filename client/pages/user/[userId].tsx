@@ -4,7 +4,7 @@ import { useGetUserQuery } from "../../app/services/userApi";
 import ErrorQueryHandling from "../../components/errorQuery";
 import UserInfo from "../../components/userInfo";
 
-const UserId = () => {
+const UserIdPage = () => {
   const { user } = useAppSelector((state) => state.auth);
 
   const { data, isError, isLoading, isSuccess, error } = useGetUserQuery(
@@ -27,4 +27,4 @@ const UserId = () => {
   );
 };
 
-export default UserId;
+export default UserIdPage;

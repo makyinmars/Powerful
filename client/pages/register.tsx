@@ -9,7 +9,7 @@ import type { RegisterRequest } from "../app/services/interfaces/userInterface";
 import ErrorHandling from "../components/errorQuery";
 import Spinner from "../components/spinner";
 
-const Register = () => {
+const RegisterPage = () => {
   const dispatch = useAppDispatch();
 
   const router = useRouter();
@@ -116,4 +116,4 @@ const Register = () => {
   );
 };
 
-export default Register;
+export default RegisterPage;
