@@ -10,7 +10,6 @@ import {
 } from "redux-persist";
 import { combineReducers } from "redux";
 import storage from "./sync-storage";
-import { createWrapper } from "next-redux-wrapper";
 
 import { userApi } from "./services/userApi";
 import authReducer from "./features/auth/authSlice";
@@ -39,14 +38,5 @@ export const store = configureStore({
     }).concat(userApi.middleware),
 });
 
-export const makeStore = () =>
-  configureStore({
-    reducer: persistedReducer,
-    middleware: (gDM) => gDM().concat(userApi.middleware),
-  });
-
-export type AppStore = ReturnType<typeof makeStore>;
 export type RootState = ReturnType<typeof store.getState>;
 export type AppDispatch = typeof store.dispatch;
-
-export const wrapper = createWrapper<AppStore>(makeStore, { debug: true });
