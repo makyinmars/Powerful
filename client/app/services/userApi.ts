@@ -1,4 +1,5 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
+import { HYDRATE } from "next-redux-wrapper";
 import { RootState } from "../store";
 import {
   User,
@@ -21,6 +22,11 @@ export const userApi = createApi({
       return headers;
     },
   }),
+  extractRehydrationInfo: (action, { reducerPath }) => {
+    if (action.type === HYDRATE) {
+      return action.payload[reducerPath];
+    }
+  },
   tagTypes: ["User"],
   endpoints: (builder) => ({
     registerUser: builder.mutation<AuthResponse, RegisterRequest>({
@@ -67,4 +73,8 @@ export const {
   useGetUserQuery,
   useUpdateUserMutation,
   useDeleteUserMutation,
+  util: { getRunningOperationPromises },
 } = userApi;
+
+// export endpoints for use in SSR
+export const { getUser, updateUser, deleteUser } = userApi.endpoints;
