@@ -13,6 +13,7 @@ import storage from "./sync-storage";
 
 import { userApi } from "./services/userApi";
 import authReducer from "./features/auth/authSlice";
+import progressReducer from "./features/progress/progressSlice";
 import { progressApi } from "./services/progressApi";
 
 const persistConfig = {
@@ -26,6 +27,7 @@ const rootReducer = combineReducers({
   [userApi.reducerPath]: userApi.reducer,
   [progressApi.reducerPath]: progressApi.reducer,
   auth: authReducer,
+  progress: progressReducer,
 });
 
 const persistedReducer = persistReducer(persistConfig, rootReducer);

@@ -1,12 +1,13 @@
 import { useForm, SubmitHandler } from "react-hook-form";
-import { useAppSelector } from "../../app/hooks";
+import { useAppSelector, useAppDispatch } from "../../app/hooks";
+import { createProgress } from "../../app/features/progress/progressSlice";
 import { CreateProgressRequest } from "../../app/services/interfaces/progressInterface";
-
-import { useCreateProgressMutation } from "../../app/services/progressApi";
 
 const ProgressPage = () => {
   // Get user id
   const { user } = useAppSelector((state) => state.auth);
+
+  const dispatch = useAppDispatch();
 
   const userId: string = user?.id as string;
 
@@ -17,34 +18,12 @@ const ProgressPage = () => {
     formState: { errors },
   } = useForm<CreateProgressRequest>();
 
-  const [createProgress, { isLoading, isError, error, isSuccess }] =
-    useCreateProgressMutation();
-
-  const onProgressSubmit: SubmitHandler<CreateProgressRequest> = async (
-    data
-  ) => {
-    // console.log(URL.createObjectURL(data.image[0]));
+  const onProgressSubmit: SubmitHandler<CreateProgressRequest> = (data) => {
     const { description, weight } = data;
+    const image = data.image[0];
+    console.log(image);
 
-    const formData = new FormData();
-    formData.append("image", data.image[0], data.image[0].name);
-
-    console.log(formData.getAll("image"));
-
-    const image = formData.getAll("image");
-
-    try {
-      const progress = await createProgress({
-        image,
-        description,
-        weight,
-        userId,
-      }).unwrap();
-      console.log(progress);
-      console.log(isSuccess, isLoading, isError);
-    } catch (error) {
-      console.log(error);
-    }
+    dispatch(createProgress({ image, description, weight, userId }));
   };
 
   return (
@@ -69,7 +48,6 @@ const ProgressPage = () => {
               type="file"
               {...register("image", { required: "An image is required" })}
               className="input-brand"
-              name="image"
             />
 
             {/* Description */}
@@ -94,7 +72,6 @@ const ProgressPage = () => {
               type="number"
               {...register("weight", {
                 required: "A description is required",
-                valueAsNumber: true,
               })}
               className="input-brand"
             />

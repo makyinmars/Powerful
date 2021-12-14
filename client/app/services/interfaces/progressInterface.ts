@@ -10,6 +10,6 @@ export interface Progress {
 export interface CreateProgressRequest {
   image: any;
   description: string;
-  weight: number;
+  weight: string;
   userId: string;
 }

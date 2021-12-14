@@ -22,11 +22,11 @@ export const progressApi = createApi({
   }),
   tagTypes: ["Progress"],
   endpoints: (builder) => ({
-    createProgress: builder.mutation<Progress, CreateProgressRequest>({
-      query: ({ image, description, weight, userId }) => ({
+    createProgress: builder.mutation<Progress, FormData>({
+      query: (body) => ({
         url: "",
         method: "POST",
-        body: { image, description, weight, userId },
+        body,
       }),
       invalidatesTags: ["Progress"],
     }),
