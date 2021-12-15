@@ -7,8 +7,8 @@ import UserInfo from "../../components/userInfo";
 const UserIdPage = () => {
   const { user } = useAppSelector((state) => state.auth);
 
-  const { data, isError, isLoading, isSuccess, error } = useGetUserQuery(
-    user?.id ?? ""
+  const { data, isError, isLoading, error } = useGetUserQuery(
+    user?.id as string
   );
 
   return (

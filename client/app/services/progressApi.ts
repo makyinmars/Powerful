@@ -1,9 +1,6 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 import { RootState } from "../store";
-import {
-  Progress,
-  CreateProgressRequest,
-} from "./interfaces/progressInterface";
+import { Progress } from "./interfaces/progressInterface";
 
 export const progressApi = createApi({
   reducerPath: "progressApi",
@@ -22,15 +19,15 @@ export const progressApi = createApi({
   }),
   tagTypes: ["Progress"],
   endpoints: (builder) => ({
-    createProgress: builder.mutation<Progress, FormData>({
-      query: (body) => ({
-        url: "",
-        method: "POST",
-        body,
-      }),
-      invalidatesTags: ["Progress"],
+    getProgress: builder.query<Progress, string>({
+      query: (id) => `/${id}`,
+      providesTags: ["Progress"],
+    }),
+    getAllProgressByUser: builder.query<Progress[], string>({
+      query: (userId) => `/user/${userId}`,
     }),
   }),
 });
 
-export const { useCreateProgressMutation } = progressApi;
+export const { useGetProgressQuery, useGetAllProgressByUserQuery } =
+  progressApi;

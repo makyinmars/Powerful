@@ -5,7 +5,6 @@ import { useForm, SubmitHandler } from "react-hook-form";
 import { useAppSelector, useAppDispatch } from "../../app/hooks";
 import {
   createProgress,
-  clearCurrentProgress,
   clearProgressStatus,
 } from "../../app/features/progress/progressSlice";
 import { CreateProgressRequest } from "../../app/services/interfaces/progressInterface";
@@ -102,7 +101,11 @@ const ProgressPage = () => {
               id="weight"
               type="number"
               {...register("weight", {
-                required: "A description is required",
+                required: "Weight is required",
+                min: {
+                  value: 30,
+                  message: "Minimum weight should be more 30",
+                },
               })}
               className="input-brand"
             />
