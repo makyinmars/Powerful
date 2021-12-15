@@ -3,6 +3,7 @@ import axios from "axios";
 import {
   Progress,
   CreateProgressRequest,
+  ProgressState,
 } from "../../services/interfaces/progressInterface";
 import { RootState } from "../../store";
 
@@ -36,38 +37,64 @@ export const createProgress = createAsyncThunk(
   }
 );
 
-const initialState: Progress = {
-  id: "",
-  picture: "",
-  description: "",
-  weight: 0,
-  cloudinary_id: "",
-  userId: "",
+const initialState: ProgressState = {
+  currentProgress: {
+    id: "",
+    picture: "",
+    description: "",
+    weight: 0,
+    cloudinary_id: "",
+    userId: "",
+  },
+  progressStatus: {
+    isLoading: false,
+    isError: false,
+    isSuccess: false,
+    errorMessage: "",
+  },
 };
 
 const progressSlice = createSlice({
   name: "progress",
   initialState,
-  reducers: {},
+  reducers: {
+    clearCurrentProgress: (state) => {
+      state.currentProgress = {
+        id: "",
+        picture: "",
+        description: "",
+        weight: 0,
+        cloudinary_id: "",
+        userId: "",
+      };
+    },
+    clearProgressStatus: (state) => {
+      state.progressStatus = {
+        isLoading: false,
+        isError: false,
+        isSuccess: false,
+        errorMessage: "",
+      };
+    },
+  },
   extraReducers: (builder) => {
     builder.addCase(createProgress.pending, (state) => {
-      console.log("Pending");
+      state.progressStatus.isLoading = true;
     });
     builder.addCase(createProgress.fulfilled, (state, { payload }) => {
-      console.log("PAYLOAD", payload);
-      const { id, picture, description, weight, cloudinary_id, userId } =
-        payload;
-      state.id = id;
-      state.picture = picture;
-      state.description = description;
-      state.weight = weight;
-      state.cloudinary_id = cloudinary_id;
-      state.userId = userId;
+      state.currentProgress = payload;
+      state.progressStatus.isLoading = false;
+      state.progressStatus.isSuccess = true;
     });
     builder.addCase(createProgress.rejected, (state) => {
-      console.log("REJECTEd");
+      state.progressStatus.isLoading = false;
+      state.progressStatus.isError = true;
+      state.progressStatus.isSuccess = false;
+      state.progressStatus.errorMessage = "Error creating progress";
     });
   },
 });
 
+export const { clearProgressStatus, clearCurrentProgress } =
+  progressSlice.actions;
 export default progressSlice.reducer;

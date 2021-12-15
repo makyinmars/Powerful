@@ -7,6 +7,17 @@ export interface Progress {
   userId: string;
 }
 
+export interface ProgressStatus {
+  isLoading: boolean;
+  isError: boolean;
+  isSuccess: boolean;
+  errorMessage: string;
+}
+export interface ProgressState {
+  currentProgress: Progress;
+  progressStatus: ProgressStatus;
+}
+
 export interface CreateProgressRequest {
   image: any;
   description: string;

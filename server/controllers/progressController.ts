@@ -168,6 +168,30 @@ const deleteProgressById = async (req: Request, res: Response) => {
   }
 };
 
+// @desc  Get all progress by user id
+// @route  GET /api/progress/user/:id
+// @access Private
+const getAllProgressByUserId = async (req: Request, res: Response) => {
+  try {
+    const { id } = req.params;
+
+    const progress = await prisma.progress.findMany({
+      where: { userId: id },
+    });
+
+    if (progress) {
+      res.status(200).json(progress);
+    } else {
+      res.status(404).json("Progress not found");
+    }
+  } catch (error) {
+    if (error instanceof Prisma.PrismaClientKnownRequestError) {
+      console.log(error.meta);
+      res.status(400).send(error.meta);
+    }
+  }
+};
+
 // @desc   Get all progress
 // @route  GET /api/progress
 // @access Private
@@ -193,5 +217,6 @@ export {
   getProgressById,
   updateProgressById,
   deleteProgressById,
+  getAllProgressByUserId,
   getAllProgress,
 };

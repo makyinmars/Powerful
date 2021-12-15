@@ -1,13 +1,29 @@
+import { useEffect } from "react";
+import { useRouter } from "next/router";
 import { useForm, SubmitHandler } from "react-hook-form";
+
 import { useAppSelector, useAppDispatch } from "../../app/hooks";
-import { createProgress } from "../../app/features/progress/progressSlice";
+import {
+  createProgress,
+  clearCurrentProgress,
+  clearProgressStatus,
+} from "../../app/features/progress/progressSlice";
 import { CreateProgressRequest } from "../../app/services/interfaces/progressInterface";
+import Spinner from "../../components/spinner";
 
 const ProgressPage = () => {
   // Get user id
   const { user } = useAppSelector((state) => state.auth);
 
+  // Get progress status
+  const { isLoading, isError, isSuccess, errorMessage } = useAppSelector(
+    (state) => state.progress.progressStatus
+  );
+  const { id } = useAppSelector((state) => state.progress.currentProgress);
+
   const dispatch = useAppDispatch();
+
+  const router = useRouter();
 
   const userId: string = user?.id as string;
 
@@ -21,10 +37,19 @@ const ProgressPage = () => {
   const onProgressSubmit: SubmitHandler<CreateProgressRequest> = (data) => {
     const { description, weight } = data;
     const image = data.image[0];
-    console.log(image);
 
     dispatch(createProgress({ image, description, weight, userId }));
   };
+
+  useEffect(() => {
+    if (user === null) {
+      router.push("/");
+    }
+    if (isSuccess) {
+      router.push(`/progress/${id}`);
+      dispatch(clearProgressStatus());
+    }
+  }, [router, user, id, isSuccess, dispatch]);
 
   return (
     <>
@@ -49,6 +74,9 @@ const ProgressPage = () => {
               {...register("image", { required: "An image is required" })}
               className="input-brand"
             />
+            {errors.image && (
+              <span className="error-brand">{errors.image.message}</span>
+            )}
 
             {/* Description */}
             <label htmlFor="description" className="label-brand">
@@ -62,6 +90,9 @@ const ProgressPage = () => {
               })}
               className="input-brand"
             />
+            {errors.description && (
+              <span className="error-brand">{errors.description.message}</span>
+            )}
 
             {/* Weight */}
             <label htmlFor="weight" className="label-brand">
@@ -75,11 +106,18 @@ const ProgressPage = () => {
               })}
               className="input-brand"
             />
+            {errors.weight && (
+              <span className="error-brand">{errors.weight.message}</span>
+            )}
 
             {/* Submit */}
             <button type="submit" className="button-brand">
               Create progress
             </button>
+
+            {/* Progress status */}
+            {isLoading && <Spinner />}
+            {isError && <p className="error-handling">{errorMessage}</p>}
           </form>
         </div>
       </div>
