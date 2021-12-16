@@ -3,6 +3,7 @@ import {
   createWorkout,
   deleteWorkoutById,
   getAllWorkouts,
+  getAllWorkoutsByUserId,
   getWorkoutById,
   updateWorkoutById,
 } from "../controllers/workoutController";
@@ -16,5 +17,7 @@ router
   .get(auth, getWorkoutById)
   .put(auth, updateWorkoutById)
   .delete(auth, deleteWorkoutById);
+
+router.get("/user/:id", auth, getAllWorkoutsByUserId);
 
 export { router as workoutRoutes };

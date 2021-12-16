@@ -115,6 +115,32 @@ const deleteWorkoutById = async (req: Request, res: Response) => {
   }
 };
 
+// @desc Get all workouts by user id
+// @route GET /api/workout/user/:id
+// @access Private
+const getAllWorkoutsByUserId = async (req: Request, res: Response) => {
+  try {
+    const { id } = req.params;
+
+    const workouts = await prisma.workout.findMany({
+      where: {
+        userId: id,
+      },
+    });
+
+    if (workouts) {
+      res.status(200).json(workouts);
+    } else {
+      res.status(404).json("Workouts not found");
+    }
+  } catch (error) {
+    if (error instanceof Prisma.PrismaClientKnownRequestError) {
+      console.log(error.meta);
+      res.status(400).send(error.meta);
+    }
+  }
+};
+
 // @desc    Get all workouts
 // @route   GET /api/workout
 // @access  Private
@@ -140,5 +166,6 @@ export {
   getWorkoutById,
   updateWorkoutById,
   deleteWorkoutById,
+  getAllWorkoutsByUserId,
   getAllWorkouts,
 };
