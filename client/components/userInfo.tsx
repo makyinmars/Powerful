@@ -184,7 +184,7 @@ const UserInfo = ({ data, isLoading, isError, error }: UserInfoProps) => {
             {isLoading && <Spinner />}
             {isError ? <ErrorQueryHandling error={error} /> : null}
             {isSuccessUpdate && (
-              <SuccessQueryHandling text="User Information Updated" />
+              <SuccessQueryHandling text="User information updated" />
             )}
           </form>
         </div>

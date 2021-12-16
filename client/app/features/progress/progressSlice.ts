@@ -4,6 +4,7 @@ import {
   Progress,
   CreateProgressRequest,
   ProgressState,
+  EditProgressRequest,
 } from "../../services/interfaces/progressInterface";
 import { RootState } from "../../store";
 
@@ -32,6 +33,39 @@ export const createProgress = createAsyncThunk(
       formData,
       config
     );
+
+    return data;
+  }
+);
+
+export const updateProgress = createAsyncThunk(
+  "progress/updateProgress",
+  async (updateProgress: EditProgressRequest, { getState }) => {
+    const token = (getState() as RootState).auth.token;
+
+    const { image, description, weight, userId, id } = updateProgress;
+
+    const formData = new FormData();
+    formData.append("image", image);
+    formData.append("description", description);
+    formData.append("weight", weight);
+    formData.append("userId", userId);
+
+    const config = {
+      headers: {
+        "Content-Type": "multipart/form-data",
+        Authorization: `Bearer ${token}`,
+      },
+    };
+
+    console.log(formData);
+    const { data } = await axios.put<Progress>(
+      `${process.env.API_URL}/api/progress/${id}`,
+      formData,
+      config
+    );
+
+    console.log(data);
 
     return data;
   }
@@ -78,6 +112,7 @@ const progressSlice = createSlice({
     },
   },
   extraReducers: (builder) => {
+    // Create progress
     builder.addCase(createProgress.pending, (state) => {
       state.progressStatus.isLoading = true;
     });
@@ -91,6 +126,22 @@ const progressSlice = createSlice({
       state.progressStatus.isError = true;
       state.progressStatus.isSuccess = false;
       state.progressStatus.errorMessage = "Error creating progress";
+    });
+
+    // Update progress
+    builder.addCase(updateProgress.pending, (state) => {
+      state.progressStatus.isLoading = true;
+    });
+    builder.addCase(updateProgress.fulfilled, (state, { payload }) => {
+      state.currentProgress = payload;
+      state.progressStatus.isLoading = false;
+      state.progressStatus.isSuccess = true;
+    });
+    builder.addCase(updateProgress.rejected, (state) => {
+      state.progressStatus.isLoading = false;
+      state.progressStatus.isError = true;
+      state.progressStatus.isSuccess = false;
+      state.progressStatus.errorMessage = "Error updating progress";
     });
   },
 });

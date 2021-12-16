@@ -24,3 +24,11 @@ export interface CreateProgressRequest {
   weight: string;
   userId: string;
 }
+
+export interface EditProgressRequest {
+  id: string;
+  image: any;
+  description: string;
+  weight: string;
+  userId: string;
+}

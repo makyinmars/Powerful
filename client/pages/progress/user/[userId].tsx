@@ -12,7 +12,9 @@ const AllProgressByUserId = () => {
   const { userId } = router.query;
 
   const { data, isError, isLoading, isSuccess, error } =
-    useGetAllProgressByUserQuery(userId as string);
+    useGetAllProgressByUserQuery(userId as string, {
+      refetchOnMountOrArgChange: true,
+    });
 
   return (
     <>

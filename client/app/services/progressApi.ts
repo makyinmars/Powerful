@@ -25,9 +25,20 @@ export const progressApi = createApi({
     }),
     getAllProgressByUser: builder.query<Progress[], string>({
       query: (userId) => `/user/${userId}`,
+      providesTags: ["Progress"],
+    }),
+    deleteProgress: builder.mutation<void, string>({
+      query: (id) => ({
+        url: `/${id}`,
+        method: "DELETE",
+      }),
+      invalidatesTags: ["Progress"],
     }),
   }),
 });
 
-export const { useGetProgressQuery, useGetAllProgressByUserQuery } =
-  progressApi;
+export const {
+  useGetProgressQuery,
+  useGetAllProgressByUserQuery,
+  useDeleteProgressMutation,
+} = progressApi;

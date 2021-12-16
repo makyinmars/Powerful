@@ -70,7 +70,7 @@
     @apply hidden sm:block;
   }
 
-  /* Cards progress by user */
+  /* Cards progress history by user */
   .container-brand-card {
     @apply flex flex-col sm:flex-row justify-center items-center m-4 w-full;
   }

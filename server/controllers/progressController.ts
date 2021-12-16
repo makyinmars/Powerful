@@ -85,6 +85,9 @@ const getProgressById = async (req: Request, res: Response) => {
 // @access Private
 const updateProgressById = async (req: Request, res: Response) => {
   try {
+    // Debug
+    console.log(req.body, req.files);
+
     const { id } = req.params;
 
     const user = await prisma.progress.findUnique({

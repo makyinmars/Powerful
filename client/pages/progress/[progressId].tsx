@@ -1,5 +1,8 @@
 import React from "react";
 import { useRouter } from "next/router";
+
+import ProgressInfo from "../../components/progressInfo";
+import ErrorQueryHandling from "../../components/errorQuery";
 import { useGetProgressQuery } from "../../app/services/progressApi";
 
 const ProgressIdPage = () => {
@@ -7,15 +10,23 @@ const ProgressIdPage = () => {
 
   const { progressId } = router.query;
 
-  const { data, isError, isLoading, isSuccess, error } = useGetProgressQuery(
-    progressId as string
+  const { data, isError, isLoading, error } = useGetProgressQuery(
+    progressId as string,
+    { refetchOnMountOrArgChange: true }
   );
-
-  console.log(data);
 
   return (
     <>
-      <h1>Progress</h1>
+      {data ? (
+        <ProgressInfo
+          data={data}
+          isError={isError}
+          isLoading={isLoading}
+          error={error}
+        />
+      ) : isError ? (
+        <ErrorQueryHandling error={error} />
+      ) : null}
     </>
   );
 };
