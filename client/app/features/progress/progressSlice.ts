@@ -58,14 +58,11 @@ export const updateProgress = createAsyncThunk(
       },
     };
 
-    console.log(formData);
     const { data } = await axios.put<Progress>(
       `${process.env.API_URL}/api/progress/${id}`,
       formData,
       config
     );
-
-    console.log(data);
 
     return data;
   }
