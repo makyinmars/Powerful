@@ -69,4 +69,21 @@
   .navbar-list-hidden {
     @apply hidden sm:block;
   }
+
+  /* Cards progress by user */
+  .container-brand-card {
+    @apply flex flex-col sm:flex-row justify-center items-center m-4 w-full;
+  }
+
+  .card-brand {
+    @apply grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4;
+  }
+
+  .card-brand-attributes {
+    @apply p-1 mt-1 rounded grid grid-cols-2 bg-gray-100;
+  }
+
+  .card-brand-description {
+    @apply flex flex-col items-center pt-1 text-white;
+  }
 }
