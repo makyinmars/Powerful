@@ -16,6 +16,8 @@ const AllProgressByUserId = () => {
       refetchOnMountOrArgChange: true,
     });
 
+  console.log(data?.length);
+
   return (
     <>
       <h1 className="heading-brand">Your progress history</h1>
@@ -29,8 +31,12 @@ const AllProgressByUserId = () => {
       {/* Status */}
       {isLoading && <Spinner />}
       {isError ? <ErrorQueryHandling error={error} /> : null}
-      {isSuccess && (
+
+      {/* Checks if array is not empty */}
+      {isSuccess && data?.length !== 0 ? (
         <SuccessQueryHandling text="Progress history loaded successfully" />
+      ) : (
+        <SuccessQueryHandling text="Progress history is empty" />
       )}
 
       <div className="container-brand-card">
