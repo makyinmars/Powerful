@@ -20,7 +20,9 @@ const WorkoutInfo = ({ data, isLoading, isError, error }: WorkoutInfoProps) => {
 
       <h2 className="text-xl text-center title-brand">{data.name}</h2>
 
-      {/* Add Exercise */}
+      {/* Add exercise */}
+
+      {/* Exercise Information */}
       <div className="grid grid-cols-1 gap-2 p-2 m-2 bg-gray-200 shadow-lg shadow-brand-600 md:grid-cols-2 xl:grid-cols-3">
         {data.exercises?.map((exercise, index) => (
           <ul

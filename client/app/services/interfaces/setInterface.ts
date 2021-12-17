@@ -11,9 +11,8 @@ export interface CreateSetRequest {
   exerciseId: string;
 }
 
-export interface EditExerciseRequest {
+export interface EditSetRequest {
   id: string;
   reps: number;
   weight: number;
-  exerciseId: string;
 }

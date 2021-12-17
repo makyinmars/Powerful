@@ -23,10 +23,10 @@ export const exerciseApi = createApi({
   tagTypes: ["Exercise"],
   endpoints: (builder) => ({
     createExercise: builder.mutation<Exercise, CreateExerciseRequest>({
-      query: ({ name, userId }) => ({
+      query: ({ name, workoutId }) => ({
         url: "",
         method: "POST",
-        body: { name, userId },
+        body: { name, workoutId },
       }),
       invalidatesTags: ["Exercise"],
     }),
@@ -34,15 +34,11 @@ export const exerciseApi = createApi({
       query: (id) => `/${id}`,
       providesTags: ["Exercise"],
     }),
-    getAllExercisesByUser: builder.query<Exercise[], string>({
-      query: (userId) => `/user/${userId}`,
-      providesTags: ["Exercise"],
-    }),
     updateExercise: builder.mutation<Exercise, EditExerciseRequest>({
-      query: ({ id, name, userId }) => ({
+      query: ({ id, name, workoutId }) => ({
         url: `/${id}`,
         method: "PUT",
-        body: { name, userId },
+        body: { name, workoutId },
       }),
       invalidatesTags: ["Exercise"],
     }),
@@ -59,7 +55,6 @@ export const exerciseApi = createApi({
 export const {
   useCreateExerciseMutation,
   useGetExerciseQuery,
-  useGetAllExercisesByUserQuery,
   useUpdateExerciseMutation,
   useDeleteExerciseMutation,
 } = exerciseApi;

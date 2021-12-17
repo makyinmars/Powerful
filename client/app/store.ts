@@ -16,6 +16,8 @@ import authReducer from "./features/auth/authSlice";
 import progressReducer from "./features/progress/progressSlice";
 import { progressApi } from "./services/progressApi";
 import { workoutApi } from "./services/workoutApi";
+import { exerciseApi } from "./services/exerciseApi";
+import { setApi } from "./services/setApi";
 
 const persistConfig = {
   key: "root",
@@ -28,6 +30,8 @@ const rootReducer = combineReducers({
   [userApi.reducerPath]: userApi.reducer,
   [progressApi.reducerPath]: progressApi.reducer,
   [workoutApi.reducerPath]: workoutApi.reducer,
+  [exerciseApi.reducerPath]: exerciseApi.reducer,
+  [setApi.reducerPath]: setApi.reducer,
   auth: authReducer,
   progress: progressReducer,
 });
@@ -44,7 +48,9 @@ export const store = configureStore({
     })
       .concat(userApi.middleware)
       .concat(progressApi.middleware)
-      .concat(workoutApi.middleware),
+      .concat(workoutApi.middleware)
+      .concat(exerciseApi.middleware)
+      .concat(setApi.middleware),
 });
 
 export type RootState = ReturnType<typeof store.getState>;

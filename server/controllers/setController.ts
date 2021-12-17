@@ -47,6 +47,7 @@ const getSetById = async (req: Request, res: Response) => {
         id: id,
       },
       select: {
+        id: true,
         weight: true,
         reps: true,
         exerciseId: true,
