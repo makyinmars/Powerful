@@ -38,13 +38,9 @@ const AllWorkoutsByUserId = () => {
         <SuccessQueryHandling text="Workout history is empty" />
       )}
 
-      <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-2">
+      <div className="container-workout-history">
         {data?.map((workout, index) => (
-          <ul
-            key={index}
-            className="flex flex-col justify-center items-center bg-gray-200 shadow 
-            shadow-xl shadow-brand-600 rounded flex-wrap p-2 mx-2"
-          >
+          <ul key={index} className="card-workout-history">
             <li className="title-brand my-2">{workout.name}</li>
             <li>
               <button className="button-brand w-auto h-10">
