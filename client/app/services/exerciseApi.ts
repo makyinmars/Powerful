@@ -1,15 +1,15 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 import { RootState } from "../store";
 import {
-  Workout,
-  CreateWorkoutRequest,
-  EditWorkoutRequest,
-} from "./interfaces/workoutInterface";
+  Exercise,
+  CreateExerciseRequest,
+  EditExerciseRequest,
+} from "./interfaces/exerciseInterface";
 
-export const workoutApi = createApi({
-  reducerPath: "workoutApi",
+export const exerciseApi = createApi({
+  reducerPath: "exerciseApi",
   baseQuery: fetchBaseQuery({
-    baseUrl: `${process.env.API_URL}/api/workout`,
+    baseUrl: `${process.env.API_URL}/api/exercise`,
     prepareHeaders: (headers, { getState }) => {
       // By default, if we have a token in the store, let's use that for authenticated requests
       const token = (getState() as RootState).auth.token;
@@ -20,46 +20,46 @@ export const workoutApi = createApi({
       return headers;
     },
   }),
-  tagTypes: ["Workout"],
+  tagTypes: ["Exercise"],
   endpoints: (builder) => ({
-    createWorkout: builder.mutation<Workout, CreateWorkoutRequest>({
+    createExercise: builder.mutation<Exercise, CreateExerciseRequest>({
       query: ({ name, userId }) => ({
         url: "",
         method: "POST",
         body: { name, userId },
       }),
-      invalidatesTags: ["Workout"],
+      invalidatesTags: ["Exercise"],
     }),
-    getWorkout: builder.query<Workout, string>({
+    getExercise: builder.query<Exercise, string>({
       query: (id) => `/${id}`,
-      providesTags: ["Workout"],
+      providesTags: ["Exercise"],
     }),
-    getAllWorkoutsByUser: builder.query<Workout[], string>({
+    getAllExercisesByUser: builder.query<Exercise[], string>({
       query: (userId) => `/user/${userId}`,
-      providesTags: ["Workout"],
+      providesTags: ["Exercise"],
     }),
-    updateWorkout: builder.mutation<Workout, EditWorkoutRequest>({
+    updateExercise: builder.mutation<Exercise, EditExerciseRequest>({
       query: ({ id, name, userId }) => ({
         url: `/${id}`,
         method: "PUT",
         body: { name, userId },
       }),
-      invalidatesTags: ["Workout"],
+      invalidatesTags: ["Exercise"],
     }),
-    deleteWorkout: builder.mutation<void, string>({
+    deleteExercise: builder.mutation<void, string>({
       query: (id) => ({
         url: `/${id}`,
         method: "DELETE",
       }),
-      invalidatesTags: ["Workout"],
+      invalidatesTags: ["Exercise"],
     }),
   }),
 });
 
 export const {
-  useCreateWorkoutMutation,
-  useGetWorkoutQuery,
-  useGetAllWorkoutsByUserQuery,
-  useUpdateWorkoutMutation,
-  useDeleteWorkoutMutation,
-} = workoutApi;
+  useCreateExerciseMutation,
+  useGetExerciseQuery,
+  useGetAllExercisesByUserQuery,
+  useUpdateExerciseMutation,
+  useDeleteExerciseMutation,
+} = exerciseApi;

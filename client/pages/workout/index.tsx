@@ -4,7 +4,10 @@ import { useRouter } from "next/router";
 
 import { useAppSelector } from "../../app/hooks";
 import { CreateWorkoutRequest } from "../../app/services/interfaces/workoutInterface";
-import { useCreateWorkoutMutation } from "../../app/services/workoutApi";
+import {
+  useCreateWorkoutMutation,
+  useGetWorkoutQuery,
+} from "../../app/services/workoutApi";
 import ErrorQueryHandling from "../../components/errorQuery";
 import Spinner from "../../components/spinner";
 
@@ -14,7 +17,7 @@ const WorkoutPage = () => {
 
   const router = useRouter();
 
-  const [createWorkout, { isLoading, isError, error }] =
+  const [createWorkout, { isLoading, isError, error, isSuccess }] =
     useCreateWorkoutMutation();
 
   const {
@@ -28,8 +31,10 @@ const WorkoutPage = () => {
   ) => {
     try {
       data.userId = user?.id as string;
-      await createWorkout(data).unwrap();
-      router.push("/");
+      const workout = await createWorkout(data).unwrap();
+
+      const { id } = workout;
+      router.push(`/workout/${id}`);
     } catch (error) {
       console.log(error);
     }

@@ -1,6 +1,9 @@
+import { Exercise } from "./exerciseInterface";
+
 export interface Workout {
   id: string;
   name: string;
+  exercises?: Exercise[];
   userId: string;
 }
 

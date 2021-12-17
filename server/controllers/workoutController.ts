@@ -47,6 +47,11 @@ const getWorkoutById = async (req: Request, res: Response) => {
         id: true,
         name: true,
         userId: true,
+        exercises: {
+          include: {
+            sets: true,
+          },
+        },
       },
     });
 
@@ -69,7 +74,7 @@ const getWorkoutById = async (req: Request, res: Response) => {
 const updateWorkoutById = async (req: Request, res: Response) => {
   try {
     const { id } = req.params;
-    const { name } = req.body;
+    const { name, exercises } = req.body;
 
     const workout = await prisma.workout.update({
       where: {
@@ -77,6 +82,7 @@ const updateWorkoutById = async (req: Request, res: Response) => {
       },
       data: {
         name: name,
+        exercises: exercises,
       },
     });
 
@@ -125,6 +131,16 @@ const getAllWorkoutsByUserId = async (req: Request, res: Response) => {
     const workouts = await prisma.workout.findMany({
       where: {
         userId: id,
+      },
+      select: {
+        id: true,
+        name: true,
+        userId: true,
+        exercises: {
+          include: {
+            sets: true,
+          },
+        },
       },
     });
 

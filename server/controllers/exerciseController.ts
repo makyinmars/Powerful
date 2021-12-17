@@ -44,8 +44,10 @@ const getExerciseById = async (req: Request, res: Response) => {
     const exercise = await prisma.exercise.findUnique({
       where: { id: id },
       select: {
+        id: true,
         name: true,
         workoutId: true,
+        sets: true,
       },
     });
 
@@ -68,12 +70,13 @@ const getExerciseById = async (req: Request, res: Response) => {
 const updateExerciseById = async (req: Request, res: Response) => {
   try {
     const { id } = req.params;
-    const { name } = req.body;
+    const { name, sets } = req.body;
 
     const exercise = await prisma.exercise.update({
       where: { id: id },
       data: {
         name: name,
+        sets: sets,
       },
     });
 
@@ -97,6 +100,12 @@ const deleteExerciseById = async (req: Request, res: Response) => {
 
     const exercise = await prisma.exercise.delete({
       where: { id: id },
+      select: {
+        id: true,
+        name: true,
+        workoutId: true,
+        sets: true,
+      },
     });
 
     if (exercise) {
