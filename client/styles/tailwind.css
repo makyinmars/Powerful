@@ -4,11 +4,11 @@
 
 @layer components {
   .title-brand {
-    @apply text-brand-600 hover:text-brand-300 font-bold text-lg;
+    @apply text-lg font-bold text-brand-600 hover:text-brand-300;
   }
 
   .heading-brand {
-    @apply text-center text-gray-900 text-xl py-6 uppercase font-bold;
+    @apply py-6 text-xl font-bold text-center text-gray-900 uppercase;
   }
 
   .container-brand {
@@ -16,7 +16,7 @@
   }
 
   .form-brand-container {
-    @apply bg-gray-300 py-8 px-6 shadow-2xl shadow-brand-800 rounded-lg sm:px-10 mx-4 my-4;
+    @apply px-6 py-8 mx-4 my-4 bg-gray-300 rounded-lg shadow-2xl shadow-brand-800 sm:px-10;
   }
 
   .form-brand {
@@ -24,11 +24,11 @@
   }
 
   .label-brand {
-    @apply block text-lg font-bold text-brand-700 mb-1;
+    @apply block mb-1 text-lg font-bold text-brand-700;
   }
 
   .input-brand {
-    @apply bg-gray-400 rounded-xl w-full border-gray-400 focus:border-brand-700 focus:ring-brand-700;
+    @apply w-full bg-gray-400 border-gray-400 rounded-xl focus:border-brand-700 focus:ring-brand-700;
   }
 
   .error-brand {
@@ -36,30 +36,27 @@
   }
 
   .button-brand {
-    @apply w-full flex justify-center py-2 px-4 border border-transparent 
-    rounded-md shadow-sm text-base font-bold text-gray-200 bg-brand-600 hover:bg-brand-700 
-    focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-brand-700;
+    @apply flex justify-center w-full px-4 py-2 text-base font-bold text-gray-200 border border-transparent rounded-md shadow-sm bg-brand-600 hover:bg-brand-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-brand-700;
   }
 
   .error-handling {
-    @apply text-center font-bold text-red-400 text-lg py-4;
+    @apply py-4 text-lg font-bold text-center text-red-400;
   }
 
   .success-handling {
-    @apply text-center font-bold text-green-700 text-lg py-4;
+    @apply py-4 text-lg font-bold text-center text-green-700;
   }
 
   .menu-button {
-    @apply capitalize inline-flex justify-center items-center;
+    @apply inline-flex items-center justify-center capitalize;
   }
 
   .menu-items {
-    @apply absolute w-full mt-2 text-brand-400 origin-top-right divide-y divide-gray-300 
-    rounded-md shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none p-2 bg-gray-300;
+    @apply absolute w-full p-2 mt-2 origin-top-right bg-gray-300 divide-y divide-gray-300 rounded-md shadow-lg text-brand-400 ring-1 ring-black ring-opacity-5 focus:outline-none;
   }
 
   .menu-item-active {
-    @apply flex rounded-md items-center w-full px-2 py-2 cursor-pointer font-bold;
+    @apply flex items-center w-full px-2 py-2 font-bold rounded-md cursor-pointer;
   }
 
   .menu-item-hidden {
@@ -72,15 +69,15 @@
 
   /* Cards progress history by user */
   .container-brand-card {
-    @apply flex flex-col sm:flex-row justify-center items-center m-4 w-full;
+    @apply flex flex-col items-center justify-center w-full m-4 sm:flex-row;
   }
 
   .card-brand {
-    @apply grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4;
+    @apply grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3;
   }
 
   .card-brand-attributes {
-    @apply p-1 mt-1 rounded grid grid-cols-2 bg-gray-100;
+    @apply grid grid-cols-2 p-1 mt-1 bg-gray-100 rounded;
   }
 
   .card-brand-description {
@@ -89,11 +86,19 @@
 
   /* Workout history page workout/user/userId */
   .container-workout-history {
-    @apply grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-2;
+    @apply grid grid-cols-2 gap-2 sm:grid-cols-3 md:grid-cols-4;
   }
 
   .card-workout-history {
-    @apply flex flex-col justify-center items-center bg-gray-200 shadow 
-            shadow-xl shadow-brand-600 rounded flex-wrap p-2 m-2;
+    @apply flex flex-col flex-wrap items-center justify-center p-2 m-2 bg-gray-200 rounded shadow-xl shadow-brand-600;
+  }
+
+  /* Workout Information */
+  .button-workout-info {
+    @apply w-16 p-1 m-1 text-sm font-bold text-gray-100 border border-none rounded bg-brand-600 hover:bg-brand-700;
+  }
+
+  .sets-title {
+    @apply;
   }
 }
