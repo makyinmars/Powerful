@@ -12,7 +12,6 @@ const WorkoutInfo = ({ data, isLoading, isError, error }: WorkoutInfoProps) => {
   // Get the workout id from data
   const { id, userId } = data;
 
-  console.log(data);
   return (
     <>
       <h1 className="heading-brand">Workout Information</h1>
@@ -23,7 +22,7 @@ const WorkoutInfo = ({ data, isLoading, isError, error }: WorkoutInfoProps) => {
         {data.exercises?.map((exercise, index) => (
           <ul
             key={index}
-            className="flex flex-col sm:flex-row justify-center items-center shadow shadow-lg"
+            className="flex flex-col sm:flex-row justify-center items-center shadow-lg"
           >
             <li>{exercise.name}</li>
           </ul>

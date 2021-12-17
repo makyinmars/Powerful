@@ -1,6 +1,8 @@
-import React from "react";
+import React, { useEffect } from "react";
 import Link from "next/link";
 import { useRouter } from "next/router";
+
+import { useAppSelector } from "../../../app/hooks";
 import { useGetAllProgressByUserQuery } from "../../../app/services/progressApi";
 import SuccessQueryHandling from "../../../components/successQuery";
 import Spinner from "../../../components/spinner";
@@ -9,12 +11,20 @@ import ErrorQueryHandling from "../../../components/errorQuery";
 const AllProgressByUserId = () => {
   const router = useRouter();
 
+  const { user } = useAppSelector((state) => state.auth);
+
   const { userId } = router.query;
 
   const { data, isError, isLoading, isSuccess, error } =
     useGetAllProgressByUserQuery(userId as string, {
       refetchOnMountOrArgChange: true,
     });
+
+  useEffect(() => {
+    if (user === null) {
+      router.push("/");
+    }
+  }, [user, router]);
 
   return (
     <>
