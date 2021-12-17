@@ -13,7 +13,7 @@ const Navbar = () => {
       </NavbarList>
       {user?.id !== undefined ? (
         <>
-          <NavbarList href="/workout">Workout</NavbarList>
+          <NavbarList href={`/workout/user/${user.id}`}>Workout</NavbarList>
           <NavbarList href={`/progress/user/${user.id}`}>Progress</NavbarList>
           <DropdownUser name={user?.name ?? ""} id={user?.id ?? ""} />
         </>

@@ -41,7 +41,7 @@ const DropdownUser = ({ name, id }: DropdownUserProps) => {
               <MenuItem text="Profile" routerLink={`/user/${id}`} />
               <MenuItem
                 text="Workout"
-                routerLink="/workout"
+                routerLink={`/workout/user/${id}`}
                 css="menu-item-hidden"
               />
               <MenuItem
