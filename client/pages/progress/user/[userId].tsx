@@ -16,8 +16,6 @@ const AllProgressByUserId = () => {
       refetchOnMountOrArgChange: true,
     });
 
-  console.log(data?.length);
-
   return (
     <>
       <h1 className="heading-brand">Your progress history</h1>
