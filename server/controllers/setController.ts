@@ -120,6 +120,38 @@ const deleteSetById = async (req: Request, res: Response) => {
   }
 };
 
+// @desc Get all sets by exerciseId
+// @route GET /api/set/exercise/:id
+// @access Private
+const getAllSetsByExerciseId = async (req: Request, res: Response) => {
+  try {
+    const { id } = req.params;
+
+    const sets = await prisma.set.findMany({
+      where: {
+        exerciseId: id,
+      },
+      select: {
+        id: true,
+        weight: true,
+        reps: true,
+        exerciseId: true,
+      },
+    });
+
+    if (sets) {
+      res.status(200).json(sets);
+    } else {
+      res.status(404).json("Sets not found");
+    }
+  } catch (error) {
+    if (error instanceof Prisma.PrismaClientKnownRequestError) {
+      console.log(error.meta);
+      res.status(400).json(error.meta);
+    }
+  }
+};
+
 // @desc    Get all sets
 // @route   GET /api/set/
 // @access  Private
@@ -140,4 +172,11 @@ const getAllSets = async (req: Request, res: Response) => {
   }
 };
 
-export { createSet, getSetById, updateSetById, deleteSetById, getAllSets };
+export {
+  createSet,
+  getSetById,
+  updateSetById,
+  deleteSetById,
+  getAllSetsByExerciseId,
+  getAllSets,
+};

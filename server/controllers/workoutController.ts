@@ -144,10 +144,14 @@ const getAllWorkoutsByUserId = async (req: Request, res: Response) => {
       },
     });
 
+    if (workouts.length === 0) {
+      res.status(200).json("There aren't exercises for this workout");
+    }
+
     if (workouts) {
       res.status(200).json(workouts);
     } else {
-      res.status(404).json("Workouts not found");
+      res.status(404).json("Exercises not found");
     }
   } catch (error) {
     if (error instanceof Prisma.PrismaClientKnownRequestError) {

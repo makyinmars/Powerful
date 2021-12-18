@@ -4,10 +4,7 @@ import { useRouter } from "next/router";
 
 import { useAppSelector } from "../../app/hooks";
 import { CreateWorkoutRequest } from "../../app/services/interfaces/workoutInterface";
-import {
-  useCreateWorkoutMutation,
-  useGetWorkoutQuery,
-} from "../../app/services/workoutApi";
+import { useCreateWorkoutMutation } from "../../app/services/workoutApi";
 import ErrorQueryHandling from "../../components/errorQuery";
 import Spinner from "../../components/spinner";
 

@@ -49,6 +49,10 @@ export const exerciseApi = createApi({
       }),
       invalidatesTags: ["Exercise"],
     }),
+    getAllExercisesByWorkoutId: builder.query<Exercise[], string>({
+      query: (workoutId) => `/workout/${workoutId}`,
+      providesTags: ["Exercise"],
+    }),
   }),
 });
 
@@ -57,4 +61,5 @@ export const {
   useGetExerciseQuery,
   useUpdateExerciseMutation,
   useDeleteExerciseMutation,
+  useGetAllExercisesByWorkoutIdQuery,
 } = exerciseApi;

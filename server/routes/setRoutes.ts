@@ -3,6 +3,7 @@ import {
   createSet,
   deleteSetById,
   getAllSets,
+  getAllSetsByExerciseId,
   getSetById,
   updateSetById,
 } from "../controllers/setController";
@@ -16,5 +17,6 @@ router
   .get(auth, getSetById)
   .put(auth, updateSetById)
   .delete(auth, deleteSetById);
+router.get("/exercise/:id", auth, getAllSetsByExerciseId);
 
 export { router as setRoutes };

@@ -49,6 +49,10 @@ export const setApi = createApi({
       }),
       invalidatesTags: ["Set"],
     }),
+    getAllSetsByExerciseId: builder.query<Set[], string>({
+      query: (exerciseId) => `/exercise/${exerciseId}`,
+      providesTags: ["Set"],
+    }),
   }),
 });
 
@@ -57,4 +61,5 @@ export const {
   useGetSetQuery,
   useUpdateSetMutation,
   useDeleteSetMutation,
+  useGetAllSetsByExerciseIdQuery,
 } = setApi;
