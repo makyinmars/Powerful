@@ -25,7 +25,7 @@ model User {
 model Workout {
   id          String @id @default(cuid())
   name        String
-  user        User @relation(fields: [userId], references: [id])
+  user        User @relation(fields: [userId], references: [id], onDelete: Cascade, onUpdate: Cascade)
   userId      String
   exercises   Exercise[]
 }
@@ -34,7 +34,7 @@ model Exercise {
   id          String @id @default(cuid())
   name        String
   sets        Set[]
-  workout     Workout @relation(fields: [workoutId], references: [id])
+  workout     Workout @relation(fields: [workoutId], references: [id], onDelete: Cascade, onUpdate: Cascade)
   workoutId   String
 }
 
@@ -42,7 +42,7 @@ model Set {
   id          String @id @default(cuid())
   reps        Int
   weight      Int
-  exercise    Exercise @relation(fields: [exerciseId], references: [id])
+  exercise    Exercise @relation(fields: [exerciseId], references: [id], onDelete: Cascade, onUpdate: Cascade)
   exerciseId  String
 }
 
@@ -52,6 +52,6 @@ picture    String
 description String
 weight     Int
 cloudinary_id String
-user       User @relation(fields: [userId], references: [id])
+user       User @relation(fields: [userId], references: [id], onDelete: Cascade, onUpdate: Cascade)
 userId    String
 }
