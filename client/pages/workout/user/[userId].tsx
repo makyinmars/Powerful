@@ -7,6 +7,7 @@ import { useGetAllWorkoutsByUserQuery } from "../../../app/services/workoutApi";
 import SuccessQueryHandling from "../../../components/successQuery";
 import Spinner from "../../../components/spinner";
 import ErrorQueryHandling from "../../../components/errorQuery";
+import HeadPage from "../../../components/headPage";
 
 const AllWorkoutsByUserId = () => {
   const router = useRouter();
@@ -28,6 +29,7 @@ const AllWorkoutsByUserId = () => {
 
   return (
     <>
+      <HeadPage title="Workout history" />
       <h1 className="heading-brand">Workout History</h1>
 
       <div className="flex justify-center">

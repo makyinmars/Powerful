@@ -9,6 +9,7 @@ import {
 } from "../../app/features/progress/progressSlice";
 import { CreateProgressRequest } from "../../app/services/interfaces/progressInterface";
 import Spinner from "../../components/spinner";
+import HeadPage from "../../components/headPage";
 
 const ProgressPage = () => {
   // Get user id
@@ -52,6 +53,7 @@ const ProgressPage = () => {
 
   return (
     <>
+      <HeadPage title="Create progress" />
       <h1 className="heading-brand">Create a new progress</h1>
       <p className="text-center">
         Tracking your body progress is important because it lets you see how you

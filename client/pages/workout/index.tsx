@@ -7,6 +7,7 @@ import { CreateWorkoutRequest } from "../../app/services/interfaces/workoutInter
 import { useCreateWorkoutMutation } from "../../app/services/workoutApi";
 import ErrorQueryHandling from "../../components/errorQuery";
 import Spinner from "../../components/spinner";
+import HeadPage from "../../components/headPage";
 
 const WorkoutPage = () => {
   // Get user id
@@ -45,6 +46,7 @@ const WorkoutPage = () => {
 
   return (
     <>
+      <HeadPage title="Create workout" />
       <h1 className="heading-brand">Create a new workout</h1>
       <p className="text-center">Enjoy your new workout!</p>
       <div className="container-brand">

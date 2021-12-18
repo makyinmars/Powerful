@@ -12,6 +12,7 @@ import {
   EditProgressRequest,
   Progress,
 } from "../app/services/interfaces/progressInterface";
+import HeadPage from "./headPage";
 
 interface ProgressInfoProps {
   data: Progress;
@@ -74,6 +75,7 @@ const ProgressInfo = ({
 
   return (
     <>
+      <HeadPage title={data.description} />
       <h1 className="heading-brand">Progress Information</h1>
 
       <div className="container-brand">

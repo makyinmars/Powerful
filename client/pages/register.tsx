@@ -8,6 +8,7 @@ import { useRegisterUserMutation } from "../app/services/userApi";
 import type { RegisterRequest } from "../app/services/interfaces/userInterface";
 import ErrorHandling from "../components/errorQuery";
 import Spinner from "../components/spinner";
+import HeadPage from "../components/headPage";
 
 const RegisterPage = () => {
   const dispatch = useAppDispatch();
@@ -36,6 +37,8 @@ const RegisterPage = () => {
 
   return (
     <>
+      <HeadPage title="Register" />
+
       <h1 className="heading-brand">Create your account</h1>
       <p className="text-center">
         Already registered?{" "}

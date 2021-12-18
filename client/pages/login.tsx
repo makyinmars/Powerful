@@ -8,6 +8,7 @@ import { useLoginMutation } from "../app/services/userApi";
 import type { LoginRequest } from "../app/services/interfaces/userInterface";
 import ErrorHandling from "../components/errorQuery";
 import Spinner from "../components/spinner";
+import HeadPage from "../components/headPage";
 
 const LoginPage = () => {
   const dispatch = useDispatch();
@@ -35,6 +36,8 @@ const LoginPage = () => {
 
   return (
     <>
+      <HeadPage title="Login" />
+
       <h1 className="heading-brand">Login to your account</h1>
 
       <p className="text-center">

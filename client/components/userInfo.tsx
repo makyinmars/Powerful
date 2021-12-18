@@ -12,6 +12,7 @@ import { useAppDispatch } from "../app/hooks";
 import ErrorQueryHandling from "./errorQuery";
 import Spinner from "./spinner";
 import SuccessQueryHandling from "./successQuery";
+import HeadPage from "./headPage";
 
 interface UserInfoProps {
   data: User;
@@ -67,6 +68,7 @@ const UserInfo = ({ data, isLoading, isError, error }: UserInfoProps) => {
 
   return (
     <>
+      <HeadPage title={data.name} />
       <h1 className="heading-brand">User Information</h1>
 
       <div className="container-brand">

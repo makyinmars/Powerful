@@ -7,6 +7,7 @@ import { useGetAllProgressByUserQuery } from "../../../app/services/progressApi"
 import SuccessQueryHandling from "../../../components/successQuery";
 import Spinner from "../../../components/spinner";
 import ErrorQueryHandling from "../../../components/errorQuery";
+import HeadPage from "../../../components/headPage";
 
 const AllProgressByUserId = () => {
   const router = useRouter();
@@ -28,6 +29,7 @@ const AllProgressByUserId = () => {
 
   return (
     <>
+      <HeadPage title="Progress history" />
       <h1 className="heading-brand">Your progress history</h1>
 
       <div className="flex justify-center">

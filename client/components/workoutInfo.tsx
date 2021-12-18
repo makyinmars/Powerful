@@ -12,6 +12,7 @@ import {
 import Spinner from "./spinner";
 import ErrorQueryHandling from "./errorQuery";
 import SetInfo from "./setInfo";
+import HeadPage from "./headPage";
 
 interface WorkoutInfoProps {
   data: Workout;
@@ -68,6 +69,8 @@ const WorkoutInfo = ({ data, isLoading, isError, error }: WorkoutInfoProps) => {
 
   return (
     <>
+      <HeadPage title={data.name} />
+
       <h1 className="heading-brand">Workout Information</h1>
 
       <h2 className="text-xl text-center title-brand">{data.name}</h2>
