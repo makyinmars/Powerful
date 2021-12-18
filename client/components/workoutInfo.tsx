@@ -1,9 +1,9 @@
 import React from "react";
 import { useForm, SubmitHandler } from "react-hook-form";
+import { FaTrashAlt } from "react-icons/fa";
 
 import { Workout } from "../app/services/interfaces/workoutInterface";
 import { CreateExerciseRequest } from "../app/services/interfaces/exerciseInterface";
-import { useGetExerciseQuery } from "../app/services/exerciseApi";
 import {
   useCreateExerciseMutation,
   useGetAllExercisesByWorkoutIdQuery,
@@ -11,7 +11,6 @@ import {
 } from "../app/services/exerciseApi";
 import Spinner from "./spinner";
 import ErrorQueryHandling from "./errorQuery";
-import { useGetAllSetsByExerciseIdQuery } from "../app/services/setApi";
 import SetInfo from "./setInfo";
 
 interface WorkoutInfoProps {
@@ -47,9 +46,27 @@ const WorkoutInfo = ({ data, isLoading, isError, error }: WorkoutInfoProps) => {
     await createExercise(data).unwrap();
   };
 
-  const { data: dataExercises } = useGetAllExercisesByWorkoutIdQuery(id, {
+  const {
+    data: dataExercises,
+    isError: isErrorGetAllExercises,
+    isLoading: isLoadingGetAllExercises,
+    error: errorGetAllExercises,
+  } = useGetAllExercisesByWorkoutIdQuery(id, {
     refetchOnMountOrArgChange: true,
   });
+
+  const [deleteExercise] = useDeleteExerciseMutation();
+
+  // Removes exercise from the list
+  const onDeleteExerciseHandler = async (exerciseId: string) => {
+    try {
+      await deleteExercise(exerciseId).unwrap();
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  console.log(dataExercises);
 
   return (
     <>
@@ -94,26 +111,37 @@ const WorkoutInfo = ({ data, isLoading, isError, error }: WorkoutInfoProps) => {
       </div>
 
       {/* Exercise Information */}
-      <div className="grid grid-cols-1 gap-2 p-2 m-2 bg-gray-200 shadow-lg shadow-brand-600 md:grid-cols-2 xl:grid-cols-3">
-        {dataExercises?.map((exercise, index) => (
-          <ul
-            key={index}
-            className="p-1 bg-gray-400 rounded shadow-xl shadow-gray-100"
-          >
-            <li className="flex justify-center bg-green-400 items-around title-brand">
-              {exercise.name}
-            </li>
+      <div className="grid grid-cols-1 gap-4 p-2 m-2 md:grid-cols-2 xl:grid-cols-3">
+        {dataExercises ? (
+          <>
+            {dataExercises.map((exercise, index) => (
+              <ul
+                key={index}
+                className="p-1 my-1 bg-gray-300 border border-solid rounded shadow-md shadow-brand-400"
+              >
+                <li className="flex justify-center items-around">
+                  <h2 className="flex-1 text-center title-brand">
+                    {exercise.name}
+                  </h2>
+                  <button onClick={() => onDeleteExerciseHandler(exercise.id)}>
+                    <FaTrashAlt size="18" className="mr-3 text-red-600" />
+                  </button>
+                </li>
 
-            {/* Add Sets */}
-            <li className="grid grid-cols-3 gap-3 p-1 font-bold text-gray-800 place-items-center">
-              <h3>Reps</h3>
-              <h3>Weight</h3>
-              <h3>Edit</h3>
-            </li>
+                {/* Add Sets */}
+                <li className="grid grid-cols-3 gap-3 p-1 font-bold text-gray-800 place-items-center">
+                  <h3>Reps</h3>
+                  <h3>Weight</h3>
+                  <h3>Edit</h3>
+                </li>
 
-            <SetInfo exerciseId={exercise.id} />
-          </ul>
-        ))}
+                <SetInfo exerciseId={exercise.id} />
+              </ul>
+            ))}
+          </>
+        ) : isErrorGetAllExercises ? (
+          <ErrorQueryHandling error={errorGetAllExercises} />
+        ) : null}
       </div>
     </>
   );

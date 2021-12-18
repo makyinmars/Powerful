@@ -138,11 +138,7 @@ const getAllExercisesByWorkoutId = async (req: Request, res: Response) => {
       },
     });
 
-    if (exercises.length === 0) {
-      res.status(200).json("There aren't exercises for this workout");
-    }
-
-    if (exercises) {
+    if (Object.keys(exercises).length > 0) {
       res.status(200).json(exercises);
     } else {
       res.status(404).json("Exercises not found");

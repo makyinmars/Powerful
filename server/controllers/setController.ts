@@ -139,7 +139,7 @@ const getAllSetsByExerciseId = async (req: Request, res: Response) => {
       },
     });
 
-    if (sets) {
+    if (Object.keys(sets).length > 0) {
       res.status(200).json(sets);
     } else {
       res.status(404).json("Sets not found");
