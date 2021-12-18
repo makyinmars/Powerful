@@ -66,8 +66,6 @@ const WorkoutInfo = ({ data, isLoading, isError, error }: WorkoutInfoProps) => {
     }
   };
 
-  console.log(dataExercises);
-
   return (
     <>
       <h1 className="heading-brand">Workout Information</h1>
@@ -135,7 +133,8 @@ const WorkoutInfo = ({ data, isLoading, isError, error }: WorkoutInfoProps) => {
                   <h3>Edit</h3>
                 </li>
 
-                <SetInfo exerciseId={exercise.id} />
+                {/* Information for Sets */}
+                <SetInfo id={exercise.id} />
               </ul>
             ))}
           </>

@@ -2,9 +2,10 @@ import { useForm, SubmitHandler } from "react-hook-form";
 import { SiAddthis } from "react-icons/si";
 
 import {
-  useGetAllSetsByExerciseIdQuery,
   useDeleteSetMutation,
+  useGetAllSetsByExerciseIdQuery,
   useUpdateSetMutation,
+  useCreateSetMutation,
 } from "../app/services/setApi";
 import {
   EditSetRequest,
@@ -12,18 +13,14 @@ import {
 } from "../app/services/interfaces/setInterface";
 
 interface SetInfoProps {
-  exerciseId: string;
+  id: string;
 }
 
-const SetInfo = ({ exerciseId }: SetInfoProps) => {
-  // console.log(exerciseId);
-  const { data } = useGetAllSetsByExerciseIdQuery(exerciseId);
-
-  // Update set
-  const [updateSet] = useUpdateSetMutation();
-
-  // Delete set
-  const [deleteSet] = useDeleteSetMutation();
+const SetInfo = ({ id }: SetInfoProps) => {
+  const { data, isLoading, isSuccess, refetch } =
+    useGetAllSetsByExerciseIdQuery(id, {
+      refetchOnMountOrArgChange: true,
+    });
 
   const {
     register: registerCreateSet,
@@ -31,19 +28,94 @@ const SetInfo = ({ exerciseId }: SetInfoProps) => {
     formState: { errors: errorsCreateSet },
   } = useForm<CreateSetRequest>();
 
+  const [createSet] = useCreateSetMutation();
+
+  const onCreateSetSubmit: SubmitHandler<CreateSetRequest> = async (data) => {
+    try {
+      data.exerciseId = id;
+      const set = await createSet(data).unwrap();
+      refetch();
+      console.log(set);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+  return (
+    <>
+      {data?.map((set, index) => (
+        <ul key={index}>
+          <SetInfoForm id={set.id} reps={set.reps} weight={set.weight} />
+        </ul>
+      ))}
+
+      {/* Add set */}
+      <form
+        onSubmit={handleSubmitCreateSet(onCreateSetSubmit)}
+        className="grid grid-cols-3 gap-4 p-1 mt-1 bg-gray-100 border rounded place-items-center "
+      >
+        <li>
+          <input
+            type="number"
+            {...registerCreateSet("reps", {
+              required: "Reps is required",
+              valueAsNumber: true,
+            })}
+            className="text-center input-brand"
+          />
+          {errorsCreateSet.reps && (
+            <span className="error-brand">{errorsCreateSet.reps.message}</span>
+          )}
+        </li>
+
+        <li>
+          <input
+            type="number"
+            {...registerCreateSet("weight", {
+              required: "Reps is required",
+              valueAsNumber: true,
+            })}
+            className="text-center input-brand"
+          />
+          {errorsCreateSet.weight && (
+            <span className="error-brand">
+              {errorsCreateSet.weight.message}
+            </span>
+          )}
+        </li>
+
+        <button type="submit">
+          <SiAddthis className="text-2xl text-green-700 hover:text-green-900" />
+        </button>
+      </form>
+    </>
+  );
+};
+
+export default SetInfo;
+
+interface SetInfoFormProps {
+  id: string;
+  reps: number;
+  weight: number;
+}
+
+const SetInfoForm = ({ id, reps, weight }: SetInfoFormProps) => {
+  const [updateSet, { isLoading, isError, isSuccess, isUninitialized }] =
+    useUpdateSetMutation();
+  // Delete set
+  const [deleteSet] = useDeleteSetMutation();
+
   const {
     register: registerEditSet,
     handleSubmit: handleSubmitEditSet,
     formState: { errors: errorsEditSet },
   } = useForm<EditSetRequest>();
 
-  const onCreateSetSubmit: SubmitHandler<CreateSetRequest> = async (data) => {
-    console.log(data);
-  };
-
   const onEditSetSubmit: SubmitHandler<EditSetRequest> = async (data) => {
     try {
-      await updateSet(data).unwrap();
+      data.id = id;
+      const set = await updateSet(data).unwrap();
+      console.log(set, isUninitialized, isLoading, isError, isSuccess);
     } catch (error) {
       console.log(error);
     }
@@ -58,74 +130,43 @@ const SetInfo = ({ exerciseId }: SetInfoProps) => {
     }
   };
 
-  console.log(data);
-
   return (
     <>
-      <form>
-        {data?.map((set, index) => (
-          <ul
-            key={index}
-            className="grid grid-cols-3 p-1 mt-1 border border-green-900 rounded place-items-center"
-          >
-            {/* Item hidden to get id of set id and remove from dom*/}
-            <li className="hidden">
-              <input
-                type="text"
-                {...registerEditSet("id")}
-                defaultValue={set.id}
-              />
-            </li>
-            <li>
-              <input
-                type="number"
-                {...registerEditSet("reps", {
-                  required: "Reps is required",
-                  valueAsNumber: true,
-                })}
-                className="text-center input-brand"
-                defaultValue={set.reps}
-              />
-            </li>
-            <li>
-              <input
-                type="number"
-                {...registerEditSet("weight", {
-                  required: "Weight is required",
-                  valueAsNumber: true,
-                })}
-                className="text-center input-brand"
-                defaultValue={set.weight}
-              />
-            </li>
-            <li className="flex flex-col sm:flex-row">
-              <button
-                className="button-workout-info"
-                type="submit"
-                onClick={handleSubmitEditSet(onEditSetSubmit)}
-              >
-                Save
-              </button>
-              <button
-                className="button-workout-info"
-                type="submit"
-                onClick={(e) => onDeleteSetHandler(e, set.id)}
-              >
-                Remove
-              </button>
-            </li>
-          </ul>
-        ))}
-      </form>
+      <form className="grid grid-cols-3 gap-4 p-1 mt-1 border border-green-900 rounded place-items-center">
+        <li>
+          <input
+            type="number"
+            {...registerEditSet("reps", { valueAsNumber: true })}
+            className="text-center input-brand"
+            defaultValue={reps}
+          />
+        </li>
+        <li>
+          <input
+            type="number"
+            {...registerEditSet("weight", { valueAsNumber: true })}
+            className="text-center input-brand"
+            defaultValue={weight}
+          />
+        </li>
 
-      {/* Add set */}
-      <div>
-        <button>
-          <SiAddthis className="text-2xl text-green-700" />
-        </button>
-      </div>
+        <li className="flex flex-col sm:flex-row">
+          <button
+            className="button-workout-info"
+            type="submit"
+            onClick={handleSubmitEditSet(onEditSetSubmit)}
+          >
+            Save
+          </button>
+          <button
+            className="button-workout-info"
+            type="submit"
+            onClick={(e) => onDeleteSetHandler(e, id)}
+          >
+            Remove
+          </button>
+        </li>
+      </form>
     </>
   );
 };
-
-export default SetInfo;
