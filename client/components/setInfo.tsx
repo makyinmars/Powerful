@@ -11,6 +11,8 @@ import {
   EditSetRequest,
   CreateSetRequest,
 } from "../app/services/interfaces/setInterface";
+import SuccessQueryHandling from "./successQuery";
+import Spinner from "./spinner";
 
 interface SetInfoProps {
   id: string;
@@ -28,14 +30,16 @@ const SetInfo = ({ id }: SetInfoProps) => {
     formState: { errors: errorsCreateSet },
   } = useForm<CreateSetRequest>();
 
-  const [createSet] = useCreateSetMutation();
+  const [
+    createSet,
+    { isSuccess: isSuccessCreateSet, isLoading: isLoadingCreateSet },
+  ] = useCreateSetMutation();
 
   const onCreateSetSubmit: SubmitHandler<CreateSetRequest> = async (data) => {
     try {
       data.exerciseId = id;
       const set = await createSet(data).unwrap();
       refetch();
-      console.log(set);
     } catch (error) {
       console.log(error);
     }
@@ -51,7 +55,7 @@ const SetInfo = ({ id }: SetInfoProps) => {
       {/* Add set */}
       <form
         onSubmit={handleSubmitCreateSet(onCreateSetSubmit)}
-        className="grid grid-cols-3 gap-4 p-1 mt-1 bg-gray-100 border rounded place-items-center "
+        className="grid grid-cols-3 gap-4 p-1 mt-1 place-items-center "
       >
         <li>
           <input
@@ -87,6 +91,12 @@ const SetInfo = ({ id }: SetInfoProps) => {
           <SiAddthis className="text-2xl text-green-700 hover:text-green-900" />
         </button>
       </form>
+
+      {/* Status */}
+      {isSuccessCreateSet ? (
+        <SuccessQueryHandling text="Set added successfully" />
+      ) : null}
+      {isLoadingCreateSet && <Spinner />}
     </>
   );
 };
@@ -114,8 +124,7 @@ const SetInfoForm = ({ id, reps, weight }: SetInfoFormProps) => {
   const onEditSetSubmit: SubmitHandler<EditSetRequest> = async (data) => {
     try {
       data.id = id;
-      const set = await updateSet(data).unwrap();
-      console.log(set, isUninitialized, isLoading, isError, isSuccess);
+      await updateSet(data).unwrap();
     } catch (error) {
       console.log(error);
     }
@@ -132,7 +141,7 @@ const SetInfoForm = ({ id, reps, weight }: SetInfoFormProps) => {
 
   return (
     <>
-      <form className="grid grid-cols-3 gap-4 p-1 mt-1 border border-green-900 rounded place-items-center">
+      <form className="grid grid-cols-3 gap-4 p-1 bg-gray-100 mt-1 border border-green-900 rounded place-items-center">
         <li>
           <input
             type="number"

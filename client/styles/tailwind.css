@@ -40,7 +40,7 @@
   }
 
   .error-handling {
-    @apply py-4 text-lg font-bold text-center text-red-400;
+    @apply text-lg font-bold text-red-400 text-center;
   }
 
   .success-handling {

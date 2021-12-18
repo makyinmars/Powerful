@@ -147,7 +147,7 @@ const getAllWorkoutsByUserId = async (req: Request, res: Response) => {
     if (Object.keys(workouts).length > 0) {
       res.status(200).json(workouts);
     } else {
-      res.status(404).json("Exercises not found");
+      res.status(404).json("Workouts not found");
     }
   } catch (error) {
     if (error instanceof Prisma.PrismaClientKnownRequestError) {

@@ -6,7 +6,6 @@ import { useAppSelector } from "../../../app/hooks";
 import { useGetAllWorkoutsByUserQuery } from "../../../app/services/workoutApi";
 import SuccessQueryHandling from "../../../components/successQuery";
 import Spinner from "../../../components/spinner";
-import ErrorQueryHandling from "../../../components/errorQuery";
 import HeadPage from "../../../components/headPage";
 
 const AllWorkoutsByUserId = () => {
@@ -20,6 +19,8 @@ const AllWorkoutsByUserId = () => {
     useGetAllWorkoutsByUserQuery(userId as string, {
       refetchOnMountOrArgChange: true,
     });
+
+  console.log(data, isError, error);
 
   useEffect(() => {
     if (user === null) {
@@ -40,7 +41,6 @@ const AllWorkoutsByUserId = () => {
 
       {/* Status */}
       {isLoading && <Spinner />}
-      {isError ? <ErrorQueryHandling error={error} /> : null}
 
       {/* Check if array is not empty */}
       {isSuccess && data?.length !== 0 ? (

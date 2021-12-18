@@ -13,6 +13,7 @@ import Spinner from "./spinner";
 import ErrorQueryHandling from "./errorQuery";
 import SetInfo from "./setInfo";
 import HeadPage from "./headPage";
+import SuccessQueryHandling from "./successQuery";
 
 interface WorkoutInfoProps {
   data: Workout;
@@ -23,7 +24,7 @@ interface WorkoutInfoProps {
 
 const WorkoutInfo = ({ data, isLoading, isError, error }: WorkoutInfoProps) => {
   // Get the workout id from data
-  const { id, userId } = data;
+  const { id } = data;
 
   const {
     register,
@@ -37,6 +38,7 @@ const WorkoutInfo = ({ data, isLoading, isError, error }: WorkoutInfoProps) => {
       isLoading: isExerciseLoading,
       isError: isExerciseError,
       error: exerciseError,
+      isSuccess: isExerciseSuccess,
     },
   ] = useCreateExerciseMutation();
 
@@ -66,6 +68,8 @@ const WorkoutInfo = ({ data, isLoading, isError, error }: WorkoutInfoProps) => {
       console.log(error);
     }
   };
+
+  console.log(isExerciseSuccess);
 
   return (
     <>
@@ -103,6 +107,12 @@ const WorkoutInfo = ({ data, isLoading, isError, error }: WorkoutInfoProps) => {
             </button>
 
             {/* Status */}
+
+            {/* Check if array is not empty */}
+            {isExerciseSuccess ? (
+              <SuccessQueryHandling text="Exercise added successfully" />
+            ) : null}
+
             {isExerciseLoading && <Spinner />}
             {isExerciseError ? (
               <ErrorQueryHandling error={exerciseError} />
@@ -141,10 +151,12 @@ const WorkoutInfo = ({ data, isLoading, isError, error }: WorkoutInfoProps) => {
               </ul>
             ))}
           </>
-        ) : isErrorGetAllExercises ? (
-          <ErrorQueryHandling error={errorGetAllExercises} />
         ) : null}
       </div>
+
+      {isErrorGetAllExercises ? (
+        <ErrorQueryHandling error={errorGetAllExercises} />
+      ) : null}
     </>
   );
 };

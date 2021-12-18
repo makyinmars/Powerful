@@ -15,7 +15,7 @@ const WorkoutPage = () => {
 
   const router = useRouter();
 
-  const [createWorkout, { isLoading, isError, error, isSuccess }] =
+  const [createWorkout, { isLoading, isError, error }] =
     useCreateWorkoutMutation();
 
   const {
@@ -30,7 +30,6 @@ const WorkoutPage = () => {
     try {
       data.userId = user?.id as string;
       const workout = await createWorkout(data).unwrap();
-
       const { id } = workout;
       router.push(`/workout/${id}`);
     } catch (error) {
