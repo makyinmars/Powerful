@@ -6,15 +6,16 @@ const Main = () => {
     <>
       <Logo />
       <div className="flex justify-center flex-col items-center">
-        <div className="flex flex-col items-center gap-4">
+        <div className="flex flex-col items-center gap-4 text-lg font-bold">
           <p className="px-4">
             Powerful is a simple and intuitive workout application that makes
-            your tracking experience easy. Think less and lift more. Make those
-            gains with Powerful.
+            your tracking experience easy
           </p>
+          <p className="px-4">Think less and lift more</p>
+          <p className="px-4">Make those gains with Powerful</p>
         </div>
       </div>
-      <div className="h-full grid grid-cols-1 gap-4 sm:grid-cols-2">
+      <div className="h-full grid grid-cols-1 gap-4 sm:grid-cols-2 font-bold">
         <MainBullets />
       </div>
     </>

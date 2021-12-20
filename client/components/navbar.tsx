@@ -19,9 +19,9 @@ const Navbar = () => {
         </>
       ) : (
         <>
+          <DropdownUser name={""} id={""} />
           <NavbarList href="/register">Register</NavbarList>
           <NavbarList href="/login">Login</NavbarList>
-          <DropdownUser name={""} id={""} />
         </>
       )}
     </>
