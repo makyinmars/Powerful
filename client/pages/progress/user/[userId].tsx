@@ -33,7 +33,7 @@ const AllProgressByUserId = () => {
       <h1 className="heading-brand">Your progress history</h1>
 
       <div className="flex justify-center">
-        <button className="button-brand w-auto">
+        <button className="w-auto button-brand">
           <Link href="/progress">Create a new progress</Link>
         </button>
       </div>
@@ -52,9 +52,9 @@ const AllProgressByUserId = () => {
       <div className="container-brand-card">
         <div className="card-brand">
           {data?.map((progress, index) => (
-            <div key={index} className="p-1 bg-brand-600 rounded">
+            <div key={index} className="p-1 rounded bg-brand-600">
               <img
-                className="w-80 h-80 rounded"
+                className="h-auto rounded w-80"
                 src={progress.picture}
                 alt={progress.description}
               />
@@ -70,7 +70,7 @@ const AllProgressByUserId = () => {
                 </div>
               </div>
               <div className="card-brand-description">
-                <h2 className="font-bold text-lg">Description</h2>
+                <h2 className="text-lg font-bold">Description</h2>
                 <p>{progress.description}</p>
               </div>
             </div>

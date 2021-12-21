@@ -83,9 +83,9 @@ const ProgressInfo = ({
           {/* Displays Current Image */}
 
           <p className="title-brand">Current image</p>
-          <div className="p-1 rounded flex justify-center">
+          <div className="flex justify-center p-1 rounded">
             <img
-              className="w-80 h-80 rounded mb-2"
+              className="h-auto mb-2 rounded w-80"
               src={data.picture}
               alt={data.description}
             />
