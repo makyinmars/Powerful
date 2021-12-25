@@ -38,7 +38,7 @@ const SetInfo = ({ id }: SetInfoProps) => {
   const onCreateSetSubmit: SubmitHandler<CreateSetRequest> = async (data) => {
     try {
       data.exerciseId = id;
-      const set = await createSet(data).unwrap();
+      await createSet(data).unwrap();
       refetch();
     } catch (error) {
       console.log(error);

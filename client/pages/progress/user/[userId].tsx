@@ -38,17 +38,6 @@ const AllProgressByUserId = () => {
         </button>
       </div>
 
-      {/* Status */}
-      {isLoading && <Spinner />}
-      {isError ? <ErrorQueryHandling error={error} /> : null}
-
-      {/* Checks if array is not empty */}
-      {isSuccess && data?.length !== 0 ? (
-        <SuccessQueryHandling text="Progress history loaded successfully" />
-      ) : (
-        <SuccessQueryHandling text="Progress history is empty" />
-      )}
-
       <div className="container-brand-card">
         <div className="card-brand">
           {data?.map((progress, index) => (
@@ -77,6 +66,17 @@ const AllProgressByUserId = () => {
           ))}
         </div>
       </div>
+
+      {/* Status */}
+      {isLoading && <Spinner />}
+      {isError ? <ErrorQueryHandling error={error} /> : null}
+
+      {/* Checks if array is not empty */}
+      {isSuccess && data?.length !== 0 ? (
+        <SuccessQueryHandling text="Progress history loaded successfully" />
+      ) : (
+        <SuccessQueryHandling text="Progress history is empty" />
+      )}
     </>
   );
 };

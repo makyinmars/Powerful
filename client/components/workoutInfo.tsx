@@ -1,4 +1,3 @@
-import React from "react";
 import { useForm, SubmitHandler } from "react-hook-form";
 import { FaTrashAlt } from "react-icons/fa";
 
@@ -54,6 +53,7 @@ const WorkoutInfo = ({ data, isLoading, isError, error }: WorkoutInfoProps) => {
     isError: isErrorGetAllExercises,
     isLoading: isLoadingGetAllExercises,
     error: errorGetAllExercises,
+    refetch,
   } = useGetAllExercisesByWorkoutIdQuery(id, {
     refetchOnMountOrArgChange: true,
   });
@@ -64,12 +64,11 @@ const WorkoutInfo = ({ data, isLoading, isError, error }: WorkoutInfoProps) => {
   const onDeleteExerciseHandler = async (exerciseId: string) => {
     try {
       await deleteExercise(exerciseId).unwrap();
+      refetch();
     } catch (error) {
       console.log(error);
     }
   };
-
-  console.log(isExerciseSuccess);
 
   return (
     <>

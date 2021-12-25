@@ -20,8 +20,6 @@ const AllWorkoutsByUserId = () => {
       refetchOnMountOrArgChange: true,
     });
 
-  console.log(data, isError, error);
-
   useEffect(() => {
     if (user === null) {
       router.push("/");
@@ -39,16 +37,6 @@ const AllWorkoutsByUserId = () => {
         </button>
       </div>
 
-      {/* Status */}
-      {isLoading && <Spinner />}
-
-      {/* Check if array is not empty */}
-      {isSuccess && data?.length !== 0 ? (
-        <SuccessQueryHandling text="Workout history loaded successfully" />
-      ) : (
-        <SuccessQueryHandling text="Workout history is empty" />
-      )}
-
       <div className="container-workout-history">
         {data?.map((workout, index) => (
           <ul key={index} className="card-workout-history">
@@ -61,6 +49,16 @@ const AllWorkoutsByUserId = () => {
           </ul>
         ))}
       </div>
+
+      {/* Status */}
+      {isLoading && <Spinner />}
+
+      {/* Check if array is not empty */}
+      {isSuccess && data?.length !== 0 ? (
+        <SuccessQueryHandling text="Workout history loaded successfully" />
+      ) : (
+        <SuccessQueryHandling text="Workout history is empty" />
+      )}
     </>
   );
 };

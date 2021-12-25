@@ -8,7 +8,11 @@
   }
 
   .heading-brand {
-    @apply py-6 text-xl font-bold text-center text-gray-900 uppercase;
+    @apply py-6 text-xl font-bold text-center uppercase text-brand-800;
+  }
+
+  .icon-mode {
+    @apply cursor-pointer w-5 h-5 text-brand-100 hover:text-brand-400;
   }
 
   .container-brand {
@@ -28,7 +32,7 @@
   }
 
   .input-brand {
-    @apply w-full bg-gray-400 border-gray-400 rounded-xl focus:border-brand-700 focus:ring-brand-700;
+    @apply w-full bg-gray-400 border-gray-400 rounded-xl text-brand-900  focus:border-brand-700 focus:ring-brand-700;
   }
 
   .error-brand {
@@ -86,7 +90,7 @@
 
   /* Workout history page workout/user/userId */
   .container-workout-history {
-    @apply grid grid-cols-2 gap-2 sm:grid-cols-3 md:grid-cols-4;
+    @apply grid grid-cols-2 gap-4 my-4 sm:grid-cols-3 md:grid-cols-4;
   }
 
   .card-workout-history {
