@@ -31,7 +31,7 @@ const RegisterPage = () => {
       dispatch(setCredentials(user));
       router.push("/");
     } catch (error) {
-      console.log(error);
+      return <ErrorHandling error={error} />;
     }
   };
 

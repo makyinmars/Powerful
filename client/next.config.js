@@ -4,4 +4,7 @@ module.exports = {
   env: {
     API_URL: "https://powerful-server.herokuapp.com",
   },
+  images: {
+    domains: ["res.cloudinary.com"],
+  },
 };

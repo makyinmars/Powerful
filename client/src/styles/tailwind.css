@@ -36,7 +36,7 @@
   }
 
   .input-brand {
-    @apply w-full bg-gray-400 border-gray-400 rounded-xl text-brand-900  focus:border-brand-700 focus:ring-brand-700;
+    @apply w-full bg-gray-400 border-gray-400 rounded-xl text-brand-900 focus:border-brand-700 focus:ring-brand-700;
   }
 
   .error-brand {
@@ -98,7 +98,7 @@
   }
 
   .card-workout-history {
-    @apply flex flex-col flex-wrap items-center justify-center p-2 m-2 bg-gray-200 rounded shadow-xl shadow-brand-600;
+    @apply flex flex-col flex-wrap items-center justify-center p-2 m-2 bg-gray-200 rounded shadow-md shadow-brand-600;
   }
 
   /* Workout Information */

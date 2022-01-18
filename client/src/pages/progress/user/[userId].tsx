@@ -1,6 +1,7 @@
 import React, { useEffect } from "react";
 import Link from "next/link";
 import { useRouter } from "next/router";
+import Image from "next/image";
 
 import { useAppSelector } from "@/app/hooks";
 import { useGetAllProgressByUserQuery } from "@/app/services/progressApi";
@@ -42,10 +43,12 @@ const AllProgressByUserId = () => {
         <div className="card-brand">
           {data?.map((progress, index) => (
             <div key={index} className="p-1 rounded bg-brand-600">
-              <img
-                className="h-auto rounded w-80"
+              <Image
+                className="rounded"
                 src={progress.picture}
                 alt={progress.description}
+                width={329}
+                height={600}
               />
               <div className="card-brand-attributes">
                 <div className="self-center">
@@ -54,8 +57,8 @@ const AllProgressByUserId = () => {
                   </button>
                 </div>
                 <div className="justify-self-center">
-                  <h2 className="title-brand">Weight</h2>
-                  <p>{progress.weight} lbs</p>
+                  <h2 className="subheading-brand">Weight</h2>
+                  <p className="text-zinc-900">{progress.weight} lbs</p>
                 </div>
               </div>
               <div className="card-brand-description">
