@@ -2,11 +2,11 @@ import React, { useEffect } from "react";
 import Link from "next/link";
 import { useRouter } from "next/router";
 
-import { useAppSelector } from "../../../app/hooks";
-import { useGetAllWorkoutsByUserQuery } from "../../../app/services/workoutApi";
-import SuccessQueryHandling from "../../../components/successQuery";
-import Spinner from "../../../components/spinner";
-import HeadPage from "../../../components/headPage";
+import { useAppSelector } from "@/app/hooks";
+import { useGetAllWorkoutsByUserQuery } from "@/app/services/workoutApi";
+import SuccessQueryHandling from "@/components/successQuery";
+import Spinner from "@/components/spinner";
+import HeadPage from "@/components/headPage";
 
 const AllWorkoutsByUserId = () => {
   const router = useRouter();

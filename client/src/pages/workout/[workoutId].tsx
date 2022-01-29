@@ -1,10 +1,10 @@
 import React, { useEffect } from "react";
 import { useRouter } from "next/router";
 
-import { useAppSelector } from "../../app/hooks";
-import { useGetWorkoutQuery } from "../../app/services/workoutApi";
-import WorkoutInfo from "../../components/workoutInfo";
-import ErrorQueryHandling from "../../components/errorQuery";
+import { useAppSelector } from "@/app/hooks";
+import { useGetWorkoutQuery } from "@/app/services/workoutApi";
+import WorkoutInfo from "@/components/workoutInfo";
+import ErrorQueryHandling from "@/components/errorQuery";
 
 const WorkoutIdPage = () => {
   const router = useRouter();

@@ -2,12 +2,12 @@ import React, { useEffect } from "react";
 import { useForm, SubmitHandler } from "react-hook-form";
 import { useRouter } from "next/router";
 
-import { useAppSelector } from "../../app/hooks";
-import { CreateWorkoutRequest } from "../../app/services/interfaces/workoutInterface";
-import { useCreateWorkoutMutation } from "../../app/services/workoutApi";
-import ErrorQueryHandling from "../../components/errorQuery";
-import Spinner from "../../components/spinner";
-import HeadPage from "../../components/headPage";
+import { useAppSelector } from "@/app/hooks";
+import { CreateWorkoutRequest } from "@/app/services/interfaces/workoutInterface";
+import { useCreateWorkoutMutation } from "@/app/services/workoutApi";
+import ErrorQueryHandling from "@/components/errorQuery";
+import Spinner from "@/components/spinner";
+import HeadPage from "@/components/headPage";
 
 const WorkoutPage = () => {
   // Get user id
