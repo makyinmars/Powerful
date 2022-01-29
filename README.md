@@ -18,7 +18,7 @@ Powerful is the simplest and most intuitive workout experience.
 - JWT
 - Cookie Parser
 
-# Powerful
+# Powerful REST API
 
 ## Version: 1.0.0
 
@@ -26,7 +26,7 @@ Powerful is the simplest and most intuitive workout experience.
 
 #### POST
 
-##### Summary
+##### Register User
 
 POST /api/user/register
 
@@ -36,11 +36,7 @@ POST /api/user/register
 | ---- | ------------------- |
 | 200  | Successful response |
 
-### /api/user/login
-
-#### POST
-
-##### Summary
+### Login User
 
 POST /api/user/login
 
@@ -50,11 +46,7 @@ POST /api/user/login
 | ---- | ------------------- |
 | 200  | Successful response |
 
-### /api/user/ckx3wi0nx0010kicmry1ybe5q
-
-#### GET
-
-##### Summary
+### Get User By Id
 
 GET /api/user/:id
 
@@ -70,11 +62,7 @@ GET /api/user/:id
 | --------------- | ------ |
 | bearerAuth      |        |
 
-### /api/user/ckx598ji20099f6cm4ew5b6rf
-
-#### PUT
-
-##### Summary
+### Edit User By Id
 
 PUT /api/user/:id
 
@@ -90,11 +78,7 @@ PUT /api/user/:id
 | --------------- | ------ |
 | bearerAuth      |        |
 
-### /api/user/ckwvppqaf0000gscmw3eh79lt
-
-#### DELETE
-
-##### Summary
+### Delete User By Id
 
 DELETE /api/user/:id
 
@@ -104,11 +88,7 @@ DELETE /api/user/:id
 | ---- | ------------------- |
 | 200  | Successful response |
 
-### /api/user
-
-#### GET
-
-##### Summary
+### Get Users
 
 GET /api/user
 
@@ -124,11 +104,7 @@ GET /api/user
 | --------------- | ------ |
 | bearerAuth      |        |
 
-### /api/workout
-
-#### POST
-
-##### Summary
+### Create A Workout
 
 POST /api/workout
 
@@ -138,9 +114,7 @@ POST /api/workout
 | ---- | ------------------- |
 | 200  | Successful response |
 
-#### GET
-
-##### Summary
+#### Get Workouts
 
 GET /api/workout
 
@@ -150,11 +124,7 @@ GET /api/workout
 | ---- | ------------------- |
 | 200  | Successful response |
 
-### /api/workout/ckx9gsyb80011kucma96hshs0
-
-#### GET
-
-##### Summary
+### Get Workout By Id
 
 GET /api/workout/:id
 
@@ -170,11 +140,7 @@ GET /api/workout/:id
 | --------------- | ------ |
 | bearerAuth      |        |
 
-### /api/workout/ckwvbq17c000048cmlqysssup
-
-#### PUT
-
-##### Summary
+### Update Workout By Id
 
 PUT /api/workout/:id
 
@@ -184,9 +150,7 @@ PUT /api/workout/:id
 | ---- | ------------------- |
 | 200  | Successful response |
 
-#### DELETE
-
-##### Summary
+#### Delete Workout By Id
 
 DELETE /api/workout/:id
 
@@ -196,11 +160,7 @@ DELETE /api/workout/:id
 | ---- | ------------------- |
 | 200  | Successful response |
 
-### /api/workout/user/ckx5d9s4t0235u7cmvf0jf9bl
-
-#### GET
-
-##### Summary
+### Get User Workout By User Id
 
 GET /api/workout/user/:id
 
@@ -216,11 +176,7 @@ GET /api/workout/user/:id
 | --------------- | ------ |
 | bearerAuth      |        |
 
-### /api/exercise
-
-#### POST
-
-##### Summary
+### Create Exercise
 
 POST /api/exercise
 
@@ -236,9 +192,7 @@ POST /api/exercise
 | --------------- | ------ |
 | bearerAuth      |        |
 
-#### GET
-
-##### Summary
+### Get Exercises
 
 GET /api/exercise
 
@@ -248,11 +202,7 @@ GET /api/exercise
 | ---- | ------------------- |
 | 200  | Successful response |
 
-### /api/exercise/ckxammb350051hkcmvpvey9lb
-
-#### GET
-
-##### Summary
+### Get Exercise By Id
 
 GET /api/exercise/:id
 
@@ -268,11 +218,7 @@ GET /api/exercise/:id
 | --------------- | ------ |
 | bearerAuth      |        |
 
-### /api/exercise/ckwv8ee8g0045dkcmb07e0b4e
-
-#### PUT
-
-##### Summary
+### Update Exercise By Id
 
 PUT /api/exercise/:id
 
@@ -282,9 +228,7 @@ PUT /api/exercise/:id
 | ---- | ------------------- |
 | 200  | Successful response |
 
-#### DELETE
-
-##### Summary
+#### DELETE Exercise By Id
 
 DELETE /api/exercise/:id
 
@@ -294,11 +238,7 @@ DELETE /api/exercise/:id
 | ---- | ------------------- |
 | 200  | Successful response |
 
-### /api/exercise/workout/ckx9gsyb80011kucma96hshs0
-
-#### GET
-
-##### Summary
+### Get Exercises by Workout Id
 
 GET /api/exercise/workout/:id
 
@@ -314,11 +254,7 @@ GET /api/exercise/workout/:id
 | --------------- | ------ |
 | bearerAuth      |        |
 
-### /api/set
-
-#### POST
-
-##### Summary
+### Create Set
 
 POST /api/set
 
@@ -334,9 +270,7 @@ POST /api/set
 | --------------- | ------ |
 | bearerAuth      |        |
 
-#### GET
-
-##### Summary
+### Get Sets
 
 GET /api/set
 
@@ -346,11 +280,7 @@ GET /api/set
 | ---- | ------------------- |
 | 200  | Successful response |
 
-### /api/set/ckxamn9wh0068hkcmlvhp8vo2
-
-#### GET
-
-##### Summary
+### Get Set By Id
 
 GET /api/set/:id
 
@@ -366,9 +296,7 @@ GET /api/set/:id
 | --------------- | ------ |
 | bearerAuth      |        |
 
-#### PUT
-
-##### Summary
+### Edit Set By Id
 
 PUT /api/set/:id
 
@@ -384,11 +312,7 @@ PUT /api/set/:id
 | --------------- | ------ |
 | bearerAuth      |        |
 
-### /api/set/ckwvet1jo00022lcmlil3jnwz
-
-#### DELETE
-
-##### Summary
+### Delete Set By Id
 
 DELETE /api/set/:id
 
@@ -398,11 +322,7 @@ DELETE /api/set/:id
 | ---- | ------------------- |
 | 200  | Successful response |
 
-### /api/set/exercise/ckxammb350051hkcmvpvey9lb
-
-#### GET
-
-##### Summary
+### Get Sets By Exercise Id
 
 GET /api/set/exercise/:id
 
@@ -418,11 +338,7 @@ GET /api/set/exercise/:id
 | --------------- | ------ |
 | bearerAuth      |        |
 
-### /api/progress
-
-#### POST
-
-##### Summary
+### Create Progress
 
 POST /api/progress
 
@@ -438,11 +354,10 @@ POST /api/progress
 | --------------- | ------ |
 | bearerAuth      |        |
 
-#### GET
-
-##### Summary
+### Get All Progress
 
 GET /api/progress
+Admin Restricted
 
 ##### Responses
 
@@ -456,11 +371,7 @@ GET /api/progress
 | --------------- | ------ |
 | bearerAuth      |        |
 
-### /api/progress/ckx6ozljy0005jjcmwfj78xl0
-
-#### GET
-
-##### Summary
+### Get Progress By Id
 
 GET /api/progress/:id
 
@@ -476,9 +387,7 @@ GET /api/progress/:id
 | --------------- | ------ |
 | bearerAuth      |        |
 
-#### PUT
-
-##### Summary
+#### Edit Progress By Id
 
 PUT /api/progres/:id
 
@@ -494,11 +403,7 @@ PUT /api/progres/:id
 | --------------- | ------ |
 | bearerAuth      |        |
 
-### /api/progress/ckx6jltmp0028ypcm9bvi4ofb
-
-#### DELETE
-
-##### Summary
+### Delete Progress By Id
 
 DELETE /api/progress/:id
 
@@ -514,11 +419,7 @@ DELETE /api/progress/:id
 | --------------- | ------ |
 | bearerAuth      |        |
 
-### /api/progress/user/ckx5d9s4t0235u7cmvf0jf9bl
-
-#### GET
-
-##### Summary
+### Get Progress By User Id
 
 GET /api/progress/user/:id
 
