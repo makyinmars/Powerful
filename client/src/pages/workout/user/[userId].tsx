@@ -3,7 +3,10 @@ import Link from "next/link";
 import { useRouter } from "next/router";
 
 import { useAppSelector } from "@/app/hooks";
-import { useGetAllWorkoutsByUserQuery } from "@/app/services/workoutApi";
+import {
+  useGetAllWorkoutsByUserQuery,
+  useDeleteWorkoutMutation,
+} from "@/app/services/workoutApi";
 import SuccessQueryHandling from "@/components/successQuery";
 import Spinner from "@/components/spinner";
 import HeadPage from "@/components/headPage";
@@ -15,10 +18,18 @@ const AllWorkoutsByUserId = () => {
 
   const { user } = useAppSelector((state) => state.auth);
 
-  const { data, isError, isLoading, isSuccess, error } =
+  const { data, isError, isLoading, isSuccess, error, refetch } =
     useGetAllWorkoutsByUserQuery(userId as string, {
       refetchOnMountOrArgChange: true,
     });
+
+  const [deleteWorkout] = useDeleteWorkoutMutation();
+
+  // Removes workout from the list
+  const handleDeleteWorkout = async (id: string) => {
+    await deleteWorkout(id).unwrap();
+    refetch();
+  };
 
   useEffect(() => {
     if (user === null) {
@@ -44,6 +55,14 @@ const AllWorkoutsByUserId = () => {
             <li>
               <button className="button-brand w-auto h-10">
                 <Link href={`/workout/${workout.id}`}>Edit workout</Link>
+              </button>
+            </li>
+            <li>
+              <button
+                className="button-brand w-auto h-10"
+                onClick={() => handleDeleteWorkout(workout.id)}
+              >
+                Delete workout
               </button>
             </li>
           </ul>

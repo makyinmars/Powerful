@@ -20,7 +20,7 @@ body {
   }
 
   .subheading-brand {
-    @apply py-1 text-lg font-bold text-center uppercase text-brand-700;
+    @apply py-1 font-bold text-center uppercase text-brand-700;
   }
 
   .icon-mode {
@@ -102,11 +102,11 @@ body {
 
   /* Workout history page workout/user/userId */
   .container-workout-history {
-    @apply grid grid-cols-2 gap-4 my-4 sm:grid-cols-3 md:grid-cols-4;
+    @apply flex sm:flex-row flex-col justify-center items-center m-1;
   }
 
   .card-workout-history {
-    @apply flex flex-col flex-wrap items-center justify-center p-2 m-2 bg-zinc-300 rounded;
+    @apply flex flex-col items-center gap-2 justify-center p-2 m-2 bg-zinc-300 rounded;
   }
 
   /* Workout Information */
