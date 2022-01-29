@@ -1,8 +1,6 @@
 const colors = require("tailwindcss/colors");
 
 module.exports = {
-  dakMode: "class",
-  mode: "jit",
   content: ["./src/**/*.{js,ts,jsx,tsx}"],
   theme: {
     extend: {

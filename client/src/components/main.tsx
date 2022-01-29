@@ -43,7 +43,7 @@ const MainBullets = () => {
             height={400}
             className="w-100 h-80 sm:w-50 sm:h-50"
           />
-          <p className="text-center text-lg p-1">{bullet.text}</p>
+          <p className="text-center text-lg p-1 text-zinc-300">{bullet.text}</p>
         </div>
       ))}
     </>
