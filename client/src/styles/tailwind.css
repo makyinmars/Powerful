@@ -3,12 +3,16 @@
 @tailwind utilities;
 
 body {
-  @apply bg-gray-400 text-gray-800;
+  @apply bg-zinc-900 text-zinc-300;
 }
 
 @layer components {
+  .animation-text {
+    @apply transition ease-in-out delay-150 hover:-translate-y-1 hover:scale-105 duration-300;
+  }
+
   .title-brand {
-    @apply text-lg font-bold text-brand-600 hover:text-brand-300;
+    @apply text-lg font-bold text-brand-600 hover:text-brand-800;
   }
 
   .heading-brand {
@@ -28,7 +32,7 @@ body {
   }
 
   .form-brand-container {
-    @apply px-6 py-8 mx-4 my-4 bg-gray-300 rounded-lg shadow-2xl shadow-brand-800 sm:px-10;
+    @apply px-6 py-8 mx-4 my-4 bg-zinc-300 rounded-lg sm:px-10;
   }
 
   .form-brand {
@@ -40,7 +44,7 @@ body {
   }
 
   .input-brand {
-    @apply w-full bg-gray-400 border-gray-400 rounded-xl text-brand-900 focus:border-brand-700 focus:ring-brand-700;
+    @apply w-full bg-zinc-100 border-zinc-400 rounded-xl text-brand-900 focus:border-brand-700 focus:ring-brand-700;
   }
 
   .error-brand {
@@ -64,7 +68,7 @@ body {
   }
 
   .menu-items {
-    @apply absolute w-full p-2 mt-2 origin-top-right bg-gray-300 divide-y divide-gray-300 rounded-md shadow-lg text-brand-400 ring-1 ring-black ring-opacity-5 focus:outline-none;
+    @apply absolute w-full p-2 mt-2 origin-top-right bg-gray-400 divide-y divide-gray-300 rounded-md shadow-lg text-brand-400 ring-1 ring-black ring-opacity-5 focus:outline-none;
   }
 
   .menu-item-active {
@@ -89,7 +93,7 @@ body {
   }
 
   .card-brand-attributes {
-    @apply grid grid-cols-2 p-1 mt-1 bg-gray-100 rounded;
+    @apply grid grid-cols-1 p-1 mt-1;
   }
 
   .card-brand-description {
@@ -102,7 +106,7 @@ body {
   }
 
   .card-workout-history {
-    @apply flex flex-col flex-wrap items-center justify-center p-2 m-2 bg-gray-200 rounded shadow-md shadow-brand-600;
+    @apply flex flex-col flex-wrap items-center justify-center p-2 m-2 bg-zinc-300 rounded;
   }
 
   /* Workout Information */

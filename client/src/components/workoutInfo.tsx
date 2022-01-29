@@ -127,7 +127,7 @@ const WorkoutInfo = ({ data, isLoading, isError, error }: WorkoutInfoProps) => {
             {dataExercises.map((exercise, index) => (
               <ul
                 key={index}
-                className="p-1 my-1 bg-gray-300 border border-solid rounded shadow-md shadow-brand-400"
+                className="p-1 my-1 bg-zinc-300 border border-solid rounded"
               >
                 <li className="flex justify-center items-around">
                   <h2 className="flex-1 text-center title-brand">

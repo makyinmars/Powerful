@@ -141,7 +141,7 @@ const SetInfoForm = ({ id, reps, weight }: SetInfoFormProps) => {
 
   return (
     <>
-      <form className="grid grid-cols-3 gap-4 p-1 bg-gray-100 mt-1 border border-green-900 rounded place-items-center">
+      <form className="grid grid-cols-3 gap-4 p-1 mt-1 border-green-900 rounded place-items-center">
         <li>
           <input
             type="number"

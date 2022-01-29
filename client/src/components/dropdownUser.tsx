@@ -108,7 +108,7 @@ const MenuItem = ({ text, routerLink, css }: MenuItemProps) => {
         {({ active }) => (
           <button
             className={`${
-              active && "bg-brand-500 text-white"
+              active && "bg-brand-500 text-gray-900"
             } menu-item-active ${css}`}
             onClick={onClickHandler}
           >

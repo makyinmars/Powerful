@@ -32,7 +32,7 @@ const AllWorkoutsByUserId = () => {
       <h1 className="heading-brand">Workout History</h1>
 
       <div className="flex justify-center">
-        <button className="button-brand w-auto">
+        <button className="button-brand w-auto animation-text">
           <Link href="/workout">Create a new workout</Link>
         </button>
       </div>

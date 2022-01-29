@@ -42,14 +42,16 @@ const AllProgressByUserId = () => {
       <div className="container-brand-card">
         <div className="card-brand">
           {data?.map((progress, index) => (
-            <div key={index} className="p-1 rounded bg-brand-600">
-              <Image
-                className="rounded"
-                src={progress.picture}
-                alt={progress.description}
-                width={329}
-                height={600}
-              />
+            <div key={index} className="p-1 rounded bg-zinc-300">
+              <div className="flex justify-center">
+                <Image
+                  className="rounded"
+                  src={progress.picture}
+                  alt={progress.description}
+                  width={150}
+                  height={300}
+                />
+              </div>
               <div className="card-brand-attributes">
                 <div className="self-center">
                   <button className="button-brand">
@@ -62,8 +64,8 @@ const AllProgressByUserId = () => {
                 </div>
               </div>
               <div className="card-brand-description">
-                <h2 className="text-lg font-bold">Description</h2>
-                <p>{progress.description}</p>
+                <h2 className="subheading-brand">Description</h2>
+                <p className="text-zinc-900">{progress.description}</p>
               </div>
             </div>
           ))}

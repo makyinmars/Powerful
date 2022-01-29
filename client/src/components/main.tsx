@@ -9,7 +9,7 @@ const Main = () => {
       <Logo />
       <div className="flex justify-center flex-col items-center">
         <div className="flex flex-col items-center text-center gap-4 text-2xl font-bold">
-          <p className="px-4">
+          <p className="px-4 mt-8">
             Powerful is a simple and intuitive workout application that makes
             your tracking experience easy.
           </p>
