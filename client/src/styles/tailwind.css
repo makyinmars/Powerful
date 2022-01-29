@@ -2,6 +2,10 @@
 @tailwind components;
 @tailwind utilities;
 
+body {
+  @apply bg-gray-400 text-gray-800;
+}
+
 @layer components {
   .title-brand {
     @apply text-lg font-bold text-brand-600 hover:text-brand-300;

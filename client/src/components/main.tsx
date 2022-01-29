@@ -34,7 +34,7 @@ const MainBullets = () => {
       {mainBullets.map((bullet, index) => (
         <div
           key={index}
-          className="flex flex-col items-center justify-center bg-zinc-200 text-zinc-900 rounded"
+          className="flex flex-col items-center justify-center text-zinc-900 rounded"
         >
           <Image
             src={bullet.src}

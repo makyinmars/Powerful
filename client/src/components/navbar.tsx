@@ -1,8 +1,6 @@
 import { FaDumbbell } from "react-icons/fa";
 import { useEffect, useState } from "react";
 import Link from "next/link";
-import { useTheme } from "next-themes";
-import { BsFillMoonFill, BsSunFill } from "react-icons/bs";
 
 import { useAppSelector } from "@/app/hooks";
 import DropdownUser from "./dropdownUser";
@@ -10,15 +8,6 @@ import DropdownUser from "./dropdownUser";
 const Navbar = () => {
   const { user } = useAppSelector((state) => state.auth);
   const [mounted, setMounted] = useState(false);
-  const { theme, setTheme } = useTheme();
-
-  const toggleTheme = () => {
-    if (theme === "light") {
-      setTheme("dark");
-    } else {
-      setTheme("light");
-    }
-  };
 
   // When mounted on client, now we can show the UI
   useEffect(() => setMounted(true), []);
@@ -42,19 +31,6 @@ const Navbar = () => {
           <NavbarList href="/register">Register</NavbarList>
           <NavbarList href="/login">Login</NavbarList>
         </>
-      )}
-      {theme === "dark" ? (
-        <div>
-          <button onClick={toggleTheme}>
-            <BsFillMoonFill className="icon-mode" />
-          </button>
-        </div>
-      ) : (
-        <div>
-          <button onClick={toggleTheme}>
-            <BsSunFill className="icon-mode" />
-          </button>
-        </div>
       )}
     </>
   );
