@@ -1,0 +1,453 @@
+openapi: 3.0.0
+info:
+  title: Powerful
+  version: 1.0.0
+servers:
+  - url: http://{{url}}
+components:
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+tags:
+  - name: User
+  - name: Workout
+  - name: Exercise
+  - name: Set
+  - name: Progres
+paths:
+  /api/user/register:
+    post:
+      tags:
+        - User
+      summary: POST /api/user/register
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              example:
+                name: maky
+                email: tom@gmail.com
+                password: '123456'
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+  /api/user/login:
+    post:
+      tags:
+        - User
+      summary: POST /api/user/login
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              example:
+                email: franklin@gmail.com
+                password: '123456'
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+  /api/user/ckx3wi0nx0010kicmry1ybe5q:
+    get:
+      tags:
+        - User
+      summary: GET /api/user/:id
+      security:
+        - bearerAuth: []
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+  /api/user/ckx598ji20099f6cm4ew5b6rf:
+    put:
+      tags:
+        - User
+      summary: PUT /api/user/:id
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              example:
+                age: 25
+                password: ''
+      security:
+        - bearerAuth: []
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+  /api/user/ckwvppqaf0000gscmw3eh79lt:
+    delete:
+      tags:
+        - User
+      summary: DELETE /api/user/:id
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+  /api/user:
+    get:
+      tags:
+        - User
+      summary: GET /api/user
+      security:
+        - bearerAuth: []
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+  /api/workout:
+    post:
+      tags:
+        - Workout
+      summary: POST /api/workout
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              example:
+                name: Legs
+                description: Hulk legs
+                userId: ckwvbmcwz0000tacm3iij46i2
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+    get:
+      tags:
+        - Workout
+      summary: GET /api/workout
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+  /api/workout/ckx9gsyb80011kucma96hshs0:
+    get:
+      tags:
+        - Workout
+      summary: GET /api/workout/:id
+      security:
+        - bearerAuth: []
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+  /api/workout/ckwvbq17c000048cmlqysssup:
+    put:
+      tags:
+        - Workout
+      summary: PUT /api/workout/:id
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              example:
+                name: Legs
+                description: Leg day all the way!!
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+    delete:
+      tags:
+        - Workout
+      summary: DELETE /api/workout/:id
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+  /api/workout/user/ckx5d9s4t0235u7cmvf0jf9bl:
+    get:
+      tags:
+        - Workout
+      summary: GET /api/workout/user/:id
+      security:
+        - bearerAuth: []
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+  /api/exercise:
+    post:
+      tags:
+        - Exercise
+      summary: POST /api/exercise
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              example:
+                name: Dumbbell press
+                workoutId: ckx9gsyb80011kucma96hshs0
+      security:
+        - bearerAuth: []
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+    get:
+      tags:
+        - Exercise
+      summary: GET /api/exercise
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+  /api/exercise/ckxammb350051hkcmvpvey9lb:
+    get:
+      tags:
+        - Exercise
+      summary: GET /api/exercise/:id
+      security:
+        - bearerAuth: []
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+  /api/exercise/ckwv8ee8g0045dkcmb07e0b4e:
+    put:
+      tags:
+        - Exercise
+      summary: PUT /api/exercise/:id
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              example:
+                name: Dumbell Bench Press
+                description: Get that gorilla chest
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+    delete:
+      tags:
+        - Exercise
+      summary: DELETE /api/exercise/:id
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+  /api/exercise/workout/ckx9gsyb80011kucma96hshs0:
+    get:
+      tags:
+        - Exercise
+      summary: GET /api/exercise/workout/:id
+      security:
+        - bearerAuth: []
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+  /api/set:
+    post:
+      tags:
+        - Set
+      summary: POST /api/set
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              example:
+                weight: 60
+                reps: 6
+                exerciseId: ckxammb350051hkcmvpvey9lb
+      security:
+        - bearerAuth: []
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+    get:
+      tags:
+        - Set
+      summary: GET /api/set
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+  /api/set/ckxamn9wh0068hkcmlvhp8vo2:
+    get:
+      tags:
+        - Set
+      summary: GET /api/set/:id
+      security:
+        - bearerAuth: []
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+    put:
+      tags:
+        - Set
+      summary: PUT /api/set/:id
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              example:
+                reps: 12
+      security:
+        - bearerAuth: []
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+  /api/set/ckwvet1jo00022lcmlil3jnwz:
+    delete:
+      tags:
+        - Set
+      summary: DELETE /api/set/:id
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+  /api/set/exercise/ckxammb350051hkcmvpvey9lb:
+    get:
+      tags:
+        - Set
+      summary: GET /api/set/exercise/:id
+      security:
+        - bearerAuth: []
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+  /api/progress:
+    post:
+      tags:
+        - Progres
+      summary: POST /api/progress
+      requestBody:
+        content:
+          multipart/form-data:
+            schema:
+              type: object
+              properties:
+                image:
+                  type: string
+                  format: binary
+                description:
+                  type: string
+                  example: I lost 90lbs
+                weight:
+                  type: integer
+                  example: '90'
+                userId:
+                  type: string
+                  example: ckx5d9s4t0235u7cmvf0jf9bl
+      security:
+        - bearerAuth: []
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+    get:
+      tags:
+        - Progres
+      summary: GET /api/progress
+      security:
+        - bearerAuth: []
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+  /api/progress/ckx6ozljy0005jjcmwfj78xl0:
+    get:
+      tags:
+        - Progres
+      summary: GET /api/progress/:id
+      security:
+        - bearerAuth: []
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+    put:
+      tags:
+        - Progres
+      summary: PUT /api/progres/:id
+      requestBody:
+        content:
+          multipart/form-data:
+            schema:
+              type: object
+              properties:
+                image:
+                  type: string
+                  format: binary
+                description:
+                  type: string
+                  example: I lost 30 pounds
+                weight:
+                  type: integer
+                  example: '60'
+      security:
+        - bearerAuth: []
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+  /api/progress/ckx6jltmp0028ypcm9bvi4ofb:
+    delete:
+      tags:
+        - Progres
+      summary: DELETE /api/progress/:id
+      security:
+        - bearerAuth: []
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+  /api/progress/user/ckx5d9s4t0235u7cmvf0jf9bl:
+    get:
+      tags:
+        - Progres
+      summary: GET /api/progress/user/:id
+      security:
+        - bearerAuth: []
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
