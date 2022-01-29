@@ -22,11 +22,7 @@ Powerful is the simplest and most intuitive workout experience.
 
 ## Version: 1.0.0
 
-### /api/user/register
-
-#### POST
-
-##### Register User
+### Regiter User
 
 POST /api/user/register
 
