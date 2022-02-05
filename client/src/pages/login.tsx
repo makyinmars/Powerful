@@ -20,7 +20,6 @@ const LoginPage = () => {
   const {
     register,
     handleSubmit,
-    watch,
     formState: { errors },
   } = useForm<LoginRequest>();
 
